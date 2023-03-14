@@ -158,6 +158,27 @@ Take a look at this CSR file [here](https://artifacts.picoctf.net/c/383/readmyce
 
 --------------------------------------------------------------------------------------------------------
 <details>
+<summary>timer</summary>
+
+### Description
+You will find the flag after analysing this apk
+Download [here](https://artifacts.picoctf.net/c/421/timer.apk).
+**Hint-1** Decompile
+**Hint-2** mobsf or jadx 
+
+### Steps taken to solve the problem.
+- Wget the file in the webshell. The file is apk file.
+- Opened the apk file in nano and saw a lot of gibberish.
+- Strings the file and piped it into grep to find the picoCTF. No success.
+- Installed the apk file on my phone. It is a normal timer with no stop button and no success.
+- Looked at the hint.
+- Had android studio installed on the pc. Opened the apk file in the android studio using option File > Profile or Debug APK.
+- The flag was in the manifests > AndroidManifest.xml file on line 5.
+- flag: picoCTF{t1m3r_r3v3rs3d_succ355fully_17496}.
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
 <summary>Template</summary>
 
 ### Description
