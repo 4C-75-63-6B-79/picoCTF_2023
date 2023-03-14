@@ -38,6 +38,22 @@ Download the file [here](https://artifacts.picoctf.net/c/297/enc_flag).
 - flag: picoCTF{base64_n3st3d_dic0d!n8_d0wnl04d3d_c0ac1752}
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>PcapPoisoning</summary>
+
+### Description
+How about some hide and seek heh?
+Download this [file](https://artifacts.picoctf.net/c/404/trace.pcap) and find the flag.
+
+### Steps taken to solve the problem.
+- Downloaded the file and opened it in the wireshark.
+- Looked at various row thing by clicking on them most of them had same text of gcv2 something something.
+- Scrolled down to find the black things. First black thing had the flag.
+- flag: picoCTF{P64P_4N4L7S1S_SU55355FUL_dd89e21b}
+- I need to learn how to use wireshark and what all the information means.
+</details>
+
 
 
 --------------------------------------------------------------------------------------------------------
