@@ -210,6 +210,120 @@ We grabbed this design doc from enemy servers: [Download](https://artifacts.pico
 - flag: picoCTF{g34r5_0f_m0r3_6170a1b1}
 </details>
 
+## Unsolved
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>findme</summary>
+
+### Description
+Help us test the form by submiting the username as test and password as test!
+Additional details will be available after launching your challenge instance.
+
+### Steps taken to solve the problem.
+- content
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>HideToSee</summary>
+
+### Description
+How about some hide and seek heh?
+Look at this image [here](https://artifacts.picoctf.net/c/507/atbash.jpg).
+**Hint** Download the image and try to extract it.
+
+### Steps taken to solve the problem.
+- Wget the file on the webshell
+- The file is a jpg and has some cipher on it.
+- Opened the file in on line hexedit. Had JFIF format on the start.
+- Went to the JFIF file format on google. Opened the [wikipedia article](https://en.wikipedia.org/wiki/JPEG_File_Interchange_Format#:~:text=The%20JPEG%20File%20Interchange%20Format,encoded%20with%20the%20JPEG%20algorithm.). Did not understand much.
+- Opened the file in the notepad to see if there is any string so that I can decode it using the ceaser cipher.
+- strings the file in webshell ```strings atbash.jpg```. Got this long string "CDEFGHIJSTUVWXYZcdefghijstuvwxyz". Did ceaser cipher on the thing with no luck.
+- Looked at the hint. Suggest to extract it. Did ``` unzip atbash.jpg ``` got an error.
+- Googled the atbash term. Found this [wikipedia article](https://en.wikipedia.org/wiki/Atbash#:~:text=Atbash%20(Hebrew%3A%20%D7%90%D7%AA%D7%91%D7%A9%3B%20also,with%20a%20standard%20collating%20order.).
+- Tried to decipher the string mentioned above using the cipher in the wikipedia article. No success.
+- Again looked at the file format and checked for any error but everything is fine.
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>who is it</summary>
+
+### Description
+Someone just sent you an email claiming to be Google's co-founder Larry Page but you suspect a scam.
+Can you help us identify whose mail server the email actually originated from?
+Download the email file [here](https://artifacts.picoctf.net/c/363/email-export.eml). Flag: picoCTF{FirstnameLastname}
+**Hint** whois can be helpful on IP addresses also, not only domain names
+
+### Steps taken to solve the problem.
+- Wget the file in the webshell. The file is .eml file.
+- Opened the file saw some sender receive things.
+- Looked at the hint.
+- [whois](https://who.is/) is a site.
+- 
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>money-ware</summary>
+
+### Description
+Flag format: picoCTF{Malwarename}
+The first letter of the malware name should be capitalized and the rest lowercase.
+Your friend just got hacked and has been asked to pay some bitcoins to 1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX. He doesn’t seem to understand what is going on and asks you for advice. Can you identify what malware he’s being a victim of?
+**Hint-1** Some crypto-currencies abuse databases exist; check them out!
+**Hint-2** Maybe Google might help.
+
+### Steps taken to solve the problem.
+- Googled the string to which the bitcoins are supposed to be payed.
+- Found articles on petya attack.
+- Google the name of the malware no success.
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>FindAndOpen</summary>
+
+### Description
+Someone might have hidden the password in the trace file.
+Find the key to unlock [this file](https://artifacts.picoctf.net/c/411/flag.zip). [This tracefile](https://artifacts.picoctf.net/c/411/dump.pcap) might be good to analyze.
+
+### Steps taken to solve the problem.
+- Wget both the files in the webshell. One is a txt file and other is pcap file.
+- The zip file is password protected. So we might need to find the password from the pcap file to get the flag.
+- Opened the pacp file in the wireshark.
+- On looking at the row we se the first few have text "Flying on Ethernet secret: Is this the flag."
+- The some had text "Could the flag have been splitted?"
+- Some had gibberish looking text.
+- Then again it came with text "May be try checking the other file".
+- The various text we saw in the various bytes are here.
+- PBwaWUvQ1RGe1Maybe try checking the other file
+- PBwaWUvQ1RGesabababkjaASKBKSBACVVAVSDDSSSSDSKJBJS
+- AABBHHPJGTFRLKVGhpcyBpcyB0aGUgc2VjcmV0OiBwaWNvQ1RGe1IzNERJTkdfTE9LZF8=
+- iBwaWNvQ1RGe1Could the flag have been splitted?
+- Flying on Ethernet secret: Is this the flag
+- picoCTF{R34DING_LOKd_
+</details>
+
+## Currently Working On
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>MSB</summary>
+
+### Description
+This image passes LSB statistical analysis, but we can't help but think there must be something to the visual artifacts present in this image...
+Download the image [here](https://artifacts.picoctf.net/c/418/Ninja-and-Prince-Genji-Ukiyoe-Utagawa-Kunisada.flag.png)
+**Hint** What's causing the 'corruption' of the image?
+
+### Steps taken to solve the problem.
+- Downloaded the image. Looked at it. The upper portion not good but lower portion good.
+- Googled MSB which is most significant bit and LSB least significant bit.
+- Looked at the hint. 
+- I think since in problem it is mentioned that the image passed the LSB test. May be the image is corrupted due to some things done to its Most Significant Bit. Like a Bit flip thing.
+</details>
+
+
 --------------------------------------------------------------------------------------------------------
 <details>
 <summary>Template</summary>
