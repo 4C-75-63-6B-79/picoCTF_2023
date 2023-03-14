@@ -109,6 +109,20 @@ I forgot the password to this [file](https://artifacts.picoctf.net/c/369/ret). P
 
 --------------------------------------------------------------------------------------------------------
 <details>
+<summary>Rules 2023</summary>
+
+### Description
+Read the rules of the competition and get a little bonus!
+[Rules](https://picoctf.org/competitions/2023-spring-rules.html)
+
+### Steps taken to solve the problem.
+- Wget the file in webshell. It is a HTML file
+- Opened in nano. Scrolled through the file. Found the flag in plain text format in the **alt** attribute of the element **img**.
+- flag: picoCTF{h34rd_und3r5700d_4ck_cba1c711}
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
 <summary>Template</summary>
 
 ### Description
