@@ -179,6 +179,39 @@ Download [here](https://artifacts.picoctf.net/c/421/timer.apk).
 
 --------------------------------------------------------------------------------------------------------
 <details>
+<summary>Virtual Machine 0</summary>
+
+### Description
+Can you crack this black box?
+We grabbed this design doc from enemy servers: [Download](https://artifacts.picoctf.net/c/472/Virtual-Machine-0.zip). We know that the rotation of the red axle is input and the rotation of the blue axle is output. The following input gives the flag as output: [Download](https://artifacts.picoctf.net/c/472/input.txt).
+**Hint** Rotating the axle that number of times is obviously not feasible. Can you model the mathematical relationship between red and blue?
+
+### Steps taken to solve the problem.
+- Wget both the files in the webshell. One file is a txt file and other is a zip file.
+- Input file had this string of number 39722847074734820757600524178581224432297292490103995919748682209850899737
+- Unzip the zip file gave a .dae file. Don't know what it is.
+- Opened the file in nano in hope to find the flag in plain text. No success.
+- Saw a term Collada in the file. Googled what is collada. Helps people to share and edit 3d files.
+- Googled how to open collada file. It showed we can open it in Blender. Had it on my pc.
+- Downloaded the file on my pc.
+- Imported the file in blender. Something like a lego thing.
+- Grabbed all the black legos and the base and moved them along the z axis to find some gears in there.
+- There are 8 teeth on the gear splined with the blue axle.
+- The big gear splined with the red axle has 40 teeth.
+- Problem mentions that input of the red axle is input and the output is at the blue axle.
+- So if we rotate red axle one the the blue axle will rotate 5 times.
+- So if we rotate the red axle the input number of times the blue axle will rotate 5 * input. 
+- Input * 5 = 198614235373674103788002620892906122161486462450519979598743411049254498685
+- Looked at the hint, which said to have a mathematical relationship between read and blue which is red 1 turn equals blue 5 turns.
+- Now we take the output value and convert then into hex using ``` hex(198614235373674103788002620892906122161486462450519979598743411049254498685) ```. 
+- We get 0x7069636f4354467b67333472355f30665f6d3072335f36313730613162317d. Which has the hex value of the pico which is 7069636f. I thought this step to convert into hex because I did the problems previously related to RSA and there we converted the number to hex.
+- Now to get the plain text we can do is import binascii and then do ``` binascii.unhexlify('7069636f4354467b67333472355f30665f6d3072335f36313730613162317d') ```.
+- And we get the flag.
+- flag: picoCTF{g34r5_0f_m0r3_6170a1b1}
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
 <summary>Template</summary>
 
 ### Description
