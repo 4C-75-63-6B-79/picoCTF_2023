@@ -54,6 +54,25 @@ Download this [file](https://artifacts.picoctf.net/c/404/trace.pcap) and find th
 - I need to learn how to use wireshark and what all the information means.
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>hideme</summary>
+
+### Description
+Every file gets a flag.
+The SOC analyst saw one image been sent back and forth between two people. They decided to investigate and found out that there was more than what meets the eye [here](https://artifacts.picoctf.net/c/493/flag.png).
+
+### Steps taken to solve the problem.
+- Downloaded the file it is simply png file with logo of picoctf.
+- Size is also small.
+- Went to [wikipedia article](https://en.wikipedia.org/wiki/PNG). To find the bits which I can change to increase the width and height of the image. Did that couple of time no success.
+- Looked at the end of the file in the hexeditor. Found some secret file things at the end thought to do unzip on this.
+- Wget into the webshell. Unzip got a new folder secret.
+- Folder had another flag.png file. Tried to unzip it got error. 
+- So wget the file on my machine. Then unzip it.
+- Found the flag file in the secret folder. I had the flag.
+- flag: picoCTF{Hiddinng_An_imag3_within_@n_ima9e_5cf64968}
+</details>
 
 
 --------------------------------------------------------------------------------------------------------
