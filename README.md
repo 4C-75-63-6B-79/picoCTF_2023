@@ -123,6 +123,25 @@ Read the rules of the competition and get a little bonus!
 
 --------------------------------------------------------------------------------------------------------
 <details>
+<summary>Safe Opener 2</summary>
+
+### Description
+What can you do with this file?
+I forgot the key to my safe but this [file](https://artifacts.picoctf.net/c/318/SafeOpener.class) is supposed to help me with retrieving the lost key. Can you help me unlock my safe?
+
+### Steps taken to solve the problem.
+- Wget the file in the webshell. File .class file. 
+- Ran the file using ``` java SafeOpener```. Prompts to enter the password of the safe. Enter password.
+- Give a string which looks base64 encoded and also a warning that we have 2 attempts left.
+- Enter password 2 more times. Gave the same string value each time. "cGFzc3dvcmQ="
+- Base64 decode this string to get password.
+- The program base64 encodeds the entered password and then prints it out.
+- Opened the file in the nano. The flag was there in plain text.
+- flag: picoCTF{SAf3_0p3n3rr_y0u_solv3d_it_d6afee27}
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
 <summary>Template</summary>
 
 ### Description
