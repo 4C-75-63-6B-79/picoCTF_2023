@@ -92,6 +92,20 @@ Download the encrypted flag [here](https://artifacts.picoctf.net/c/451/encrypted
 - flag: picoCTF{r0tat1on_d3crypt3d_7ecd1c61}
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>Reverse</summary>
+
+### Description
+Try reversing this file? Can ya?
+I forgot the password to this [file](https://artifacts.picoctf.net/c/369/ret). Please find it for me?
+
+### Steps taken to solve the problem.
+- Wget the file in the webshell. It is a elf file. Not my strong point.
+- Opened the file in the nano. The flag was there in plain text.
+- flag: picoCTF{3lf_r3v3r5ing_succe55ful_fe733618}
+- This was straight up luck to find the flag. I don't know how to reverse the elf file.
+</details>
 
 --------------------------------------------------------------------------------------------------------
 <details>
