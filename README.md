@@ -74,6 +74,24 @@ The SOC analyst saw one image been sent back and forth between two people. They 
 - flag: picoCTF{Hiddinng_An_imag3_within_@n_ima9e_5cf64968}
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>rotation</summary>
+
+### Description
+You will find the flag after decrypting this file
+Download the encrypted flag [here](https://artifacts.picoctf.net/c/451/encrypted.txt).
+
+### Steps taken to solve the problem.
+- Wget the file in the webshell. It is a txt file.
+- Cat the contents of the file. Lookes like a ceaser cipher of the flag.
+- Copied the encrypted flag. ```xqkwKBN{z0bib1wv_l3kzgxb3l_7mkl1k61}```.
+- Made [this](/solutions/rotation.py) program to get all the ciphers.
+- Run the program and enter the encrypted flag. You will get all the cipher for the 26 keys. See which is in the picoCTF format.
+- Mine was with key 18.
+- flag: picoCTF{r0tat1on_d3crypt3d_7ecd1c61}
+</details>
+
 
 --------------------------------------------------------------------------------------------------------
 <details>
