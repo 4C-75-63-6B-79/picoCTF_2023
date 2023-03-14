@@ -21,7 +21,22 @@ Password: RmhP1XBDEg
 - flag: picoCTF{Sch3DUL7NG_T45K3_L1NUX_dbc85700}.
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>repetitions</summary>
 
+### Description
+Can you make sense of this file?
+Download the file [here](https://artifacts.picoctf.net/c/297/enc_flag).
+
+### Steps taken to solve the problem.
+- Wget the file on the web shell.
+- Cat the file. I had equal to at the end. So may be base64  encoded file.
+- Base64 decode it ```cat enc_flag | base64 -d```. The output again had equal to at the end. So may be base64 decode again.
+- Output again looked like base64 encoded. So base64 decode again.
+- Had to base64 decode a couple more times to get the flag. ```cat enc_flag | base64 -d | base64 -d | base64 -d | base64 -d | base64 -d | base64 -d```
+- flag: picoCTF{base64_n3st3d_dic0d!n8_d0wnl04d3d_c0ac1752}
+</details>
 
 
 
