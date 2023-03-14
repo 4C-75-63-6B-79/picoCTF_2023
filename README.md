@@ -142,6 +142,22 @@ I forgot the key to my safe but this [file](https://artifacts.picoctf.net/c/318/
 
 --------------------------------------------------------------------------------------------------------
 <details>
+<summary>ReadMyCert</summary>
+
+### Description
+How about we take you on an adventure on exploring certificate signing requests
+Take a look at this CSR file [here](https://artifacts.picoctf.net/c/383/readmycert.csr).
+
+### Steps taken to solve the problem.
+- Wget the file on the webshell. 
+- Cat the file and see the file has text which may be base64 encoded.
+- Use this [online base64](https://www.base64decode.org/) decoder and find the flag format string.
+- flag: picoCTF{read_mycert_7834c5f2}
+</details>
+
+
+--------------------------------------------------------------------------------------------------------
+<details>
 <summary>Template</summary>
 
 ### Description
