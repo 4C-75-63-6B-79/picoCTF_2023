@@ -1,6 +1,8 @@
 # picoCTF_comp_2023
 
+--------------------------------------------------------------------------------------------------------
 ## Solved
+
 --------------------------------------------------------------------------------------------------------
 <details>
 <summary>chrono</summary>
@@ -210,18 +212,37 @@ We grabbed this design doc from enemy servers: [Download](https://artifacts.pico
 - flag: picoCTF{g34r5_0f_m0r3_6170a1b1}
 </details>
 
-## Unsolved
 --------------------------------------------------------------------------------------------------------
 <details>
-<summary>findme</summary>
+<summary>FindAndOpen</summary>
 
 ### Description
-Help us test the form by submiting the username as test and password as test!
-Additional details will be available after launching your challenge instance.
+Someone might have hidden the password in the trace file.
+Find the key to unlock [this file](https://artifacts.picoctf.net/c/411/flag.zip). [This tracefile](https://artifacts.picoctf.net/c/411/dump.pcap) might be good to analyze.
 
 ### Steps taken to solve the problem.
-- content
+- Wget both the files in the webshell. One is a txt file and other is pcap file.
+- The zip file is password protected. So we might need to find the password from the pcap file to get the flag.
+- Opened the pacp file in the wireshark.
+- On looking at the row we se the first few have text "Flying on Ethernet secret: Is this the flag."
+- The some had text "Could the flag have been splitted?"
+- Some had gibberish looking text.
+- Then again it came with text "May be try checking the other file".
+- The various text we saw in the various bytes are here.
+- Flying on Ethernet secret: Is this the flag
+- iBwaWNvQ1RGe1Could the flag have been splitted?
+- AABBHHPJGTFRLKVGhpcyBpcyB0aGUgc2VjcmV0OiBwaWNvQ1RGe1IzNERJTkdfTE9LZF8=
+- PBwaWUvQ1RGesabababkjaASKBKSBACVVAVSDDSSSSDSKJBJS
+- PBwaWUvQ1RGe1Maybe try checking the other file
+- Now I used a [online base64 decoder](https://www.base64decode.org/).
+- Using the combination of last plus the first and the second we get this string "<YKƲmk^rH^^z picoCTF{PWmjZz{)+my�<This is the secret: picoCTF{R34DING_LOKd_"
+- picoCTF{R34DING_LOKd_ is used this as the secret password to unzip the flag file on my pc.
+- After unzip we got a flag file. I opened the flag file in the notepad. Got the flag.
+- flag: picoCTF{R34DING_LOKd_fil56_succ3ss_8ec01288}
 </details>
+
+--------------------------------------------------------------------------------------------------------
+## Unsolved
 
 --------------------------------------------------------------------------------------------------------
 <details>
@@ -282,33 +303,6 @@ Your friend just got hacked and has been asked to pay some bitcoins to 1Mz7153HM
 
 --------------------------------------------------------------------------------------------------------
 <details>
-<summary>FindAndOpen</summary>
-
-### Description
-Someone might have hidden the password in the trace file.
-Find the key to unlock [this file](https://artifacts.picoctf.net/c/411/flag.zip). [This tracefile](https://artifacts.picoctf.net/c/411/dump.pcap) might be good to analyze.
-
-### Steps taken to solve the problem.
-- Wget both the files in the webshell. One is a txt file and other is pcap file.
-- The zip file is password protected. So we might need to find the password from the pcap file to get the flag.
-- Opened the pacp file in the wireshark.
-- On looking at the row we se the first few have text "Flying on Ethernet secret: Is this the flag."
-- The some had text "Could the flag have been splitted?"
-- Some had gibberish looking text.
-- Then again it came with text "May be try checking the other file".
-- The various text we saw in the various bytes are here.
-- PBwaWUvQ1RGe1Maybe try checking the other file
-- PBwaWUvQ1RGesabababkjaASKBKSBACVVAVSDDSSSSDSKJBJS
-- AABBHHPJGTFRLKVGhpcyBpcyB0aGUgc2VjcmV0OiBwaWNvQ1RGe1IzNERJTkdfTE9LZF8=
-- iBwaWNvQ1RGe1Could the flag have been splitted?
-- Flying on Ethernet secret: Is this the flag
-- picoCTF{R34DING_LOKd_
-</details>
-
-## Currently Working On
-
---------------------------------------------------------------------------------------------------------
-<details>
 <summary>MSB</summary>
 
 ### Description
@@ -321,7 +315,51 @@ Download the image [here](https://artifacts.picoctf.net/c/418/Ninja-and-Prince-G
 - Googled MSB which is most significant bit and LSB least significant bit.
 - Looked at the hint. 
 - I think since in problem it is mentioned that the image passed the LSB test. May be the image is corrupted due to some things done to its Most Significant Bit. Like a Bit flip thing.
+- Tried to do the bitflip of the MSB and obtained a image but was not useful.
+- Googled about MSB stegnography found this [article](http://ijcst.com/vol33/4/anil2.pdf).
+- So if we go through all the pixels of the image and the find the MSB of all the pixels. Then we can convert that binary value to ascii which might be our flag.
+- Failed at the above solution and got a bunch of gibberish.
+- Googled how to do LSB stegnography on an image. To understand what has been done to image.
 </details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>Permissions</summary>
+
+### Description
+Can you read files in the root file?
+The system admin has provisioned an account for you on the main server:
+ssh -p 62831 picoplayer@saturn.picoctf.net
+Password: cPC09LVcyM
+Can you login and read the root file?
+**Hint** What permissions do you have?
+### Steps taken to solve the problem.
+- Copied the ssh command on webshell but did not get the password prompt.
+- Pasted the password anyways nothing happened.
+- Ended the session.
+- Tried changing the port and then ssh. Gave an error. 
+- Again ssh tried typing in whoami, pwd ls commands nothing happened.
+- Looked at the hint.
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>SOAP</summary>
+
+### Description
+The web project was rushed and no security assessment was done. Can you read the /etc/passwd file?
+Web Portal
+**Hint** XML external entity Injection
+### Steps taken to solve the problem.
+- Opened the website. Used the inspect element thing nothing there.
+- Tried to nc the website nothing there too.
+- Tried to wget the website, it got stuck at connecting the sever.
+- Looked at the hint. Google the hint.
+- 
+</details>
+
+--------------------------------------------------------------------------------------------------------
+## Currently Working On
 
 
 --------------------------------------------------------------------------------------------------------
@@ -334,5 +372,8 @@ Download the image [here](https://artifacts.picoctf.net/c/418/Ninja-and-Prince-G
 ### Steps taken to solve the problem.
 - content
 </details>
+
+
+
 
 
