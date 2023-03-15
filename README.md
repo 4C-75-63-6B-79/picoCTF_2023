@@ -256,6 +256,26 @@ Additional details will be available after launching your challenge [instance](h
 - flag: picoCTF{succ3ssfully_matchtheregex_36f43841}
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>who is it</summary>
+
+### Description
+Someone just sent you an email claiming to be Google's co-founder Larry Page but you suspect a scam.
+Can you help us identify whose mail server the email actually originated from?
+Download the email file [here](https://artifacts.picoctf.net/c/363/email-export.eml). Flag: picoCTF{FirstnameLastname}
+**Hint** whois can be helpful on IP addresses also, not only domain names
+
+### Steps taken to solve the problem.
+- Wget the file in the webshell. The file is .eml file.
+- Opened the file saw some sender receive things.
+- Looked at the hint.
+- [whois](https://who.is/) is a site.
+- Google whois ip address look up. Found this [whois site](https://www.whatismyip.com/ip-whois-lookup/).
+- Opened the file in nano in webshell. Found a ipaddress 173.249.33.206.
+- Pasted in the search box of the website and got a long thing. Looked for name and found "Wilhelm Zwalina".
+- flag: picoCTF{WilhelmZwalina}
+</details>
 
 --------------------------------------------------------------------------------------------------------
 ## Unsolved
@@ -282,23 +302,6 @@ Look at this image [here](https://artifacts.picoctf.net/c/507/atbash.jpg).
 - Again looked at the file format and checked for any error but everything is fine.
 </details>
 
---------------------------------------------------------------------------------------------------------
-<details>
-<summary>who is it</summary>
-
-### Description
-Someone just sent you an email claiming to be Google's co-founder Larry Page but you suspect a scam.
-Can you help us identify whose mail server the email actually originated from?
-Download the email file [here](https://artifacts.picoctf.net/c/363/email-export.eml). Flag: picoCTF{FirstnameLastname}
-**Hint** whois can be helpful on IP addresses also, not only domain names
-
-### Steps taken to solve the problem.
-- Wget the file in the webshell. The file is .eml file.
-- Opened the file saw some sender receive things.
-- Looked at the hint.
-- [whois](https://who.is/) is a site.
-- 
-</details>
 
 --------------------------------------------------------------------------------------------------------
 <details>
@@ -399,7 +402,47 @@ The website running [here](http://saturn.picoctf.net:61202/).
 </details>  
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>useless</summary>
+
+### Description
+There's an interesting script in the user's home directory
+The work computer is running SSH. We've been given a script which performs some basic calculations, explore the script and find a flag.
+Hostname: saturn.picoctf.net
+Port:     54200
+Username: picoplayer
+Password: password
+
+### Steps taken to solve the problem.
+- content
+</details>
+
+--------------------------------------------------------------------------------------------------------
 ## Currently Working On
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>two-sum</summary>
+
+### Description
+Can you solve this?
+What two positive numbers can make this possible: n1 > n1 + n2 OR n2 > n1 + n2
+Enter them here nc saturn.picoctf.net 49225. [Source](https://artifacts.picoctf.net/c/252/flag.c)
+
+### Steps taken to solve the problem.
+- Nc into the server. Entered any random number nothing happened.
+- Wget the source file in the webshell and opened it inside of nano.
+- Looked into the flag.c file. Saw if there is a function addIntOvf which if returns 0 then the program will exit. So some how i have to enter 2 numbers such that both of them are either positive or negative but their sum is of opposite sign.
+- This is something like in java if we try to hold a value which is larger than what int data type can hold it will become negative something like that I studied in a book but don't remember it. 
+- Google what is integer overflow. Read the [wikipedia article](https://en.wikipedia.org/wiki/Integer_overflow).
+- Google what is the size of integer in c language. It is 2 bytes or 16 bits.
+- Googled largest number integer in c language can hold. 2147483647
+- Ran the program with gcc flag.c then ./a.out. Entered the 2147483647 2147483647 numbers
+- Got you have an integer overflow. Flag not found please run this on server.
+- By this time the instance was shut down. So again started it.
+</details>
+
+
 
 
 
