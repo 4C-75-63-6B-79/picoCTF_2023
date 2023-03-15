@@ -242,6 +242,22 @@ Find the key to unlock [this file](https://artifacts.picoctf.net/c/411/flag.zip)
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>MatchTheRegex</summary>
+
+### Description
+How about trying to match a regular expression
+Additional details will be available after launching your challenge [instance](http://saturn.picoctf.net:59685/).
+
+### Steps taken to solve the problem.
+- Started the instance and opened the website.
+- Opened the developer tools and looked at the elements. I was trying to look if there was some kind of regular expression used in script.
+- I saw that there was a comment in the script // ^p.....F!?. I saw the caret sign thought that the input should be begin with the p and enterd picoCTF and got the flag. One can also enter paaaAAF to get the flag but I am not sure about this.
+- flag: picoCTF{succ3ssfully_matchtheregex_36f43841}
+</details>
+
+
+--------------------------------------------------------------------------------------------------------
 ## Unsolved
 
 --------------------------------------------------------------------------------------------------------
@@ -359,7 +375,33 @@ Web Portal
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>findme</summary>
+
+### Description
+Help us test the form by submiting the username as test and password as test!
+The website running [here](http://saturn.picoctf.net:61202/).
+**Hint** any redirections?
+
+### Steps taken to solve the problem.
+- Started the instance and opened the website.
+- Login the webiste with the given credentials.
+- A page opened with search for flag search element.
+- Opened the developer tools and went straight to the cookies thing.
+- Nothing was there.
+- Looked at the sources. Nothing there.
+- Searched for flag in the thing nothing there too.
+- Looked at the hint. Did not understand anything.
+- The text in the website is similar to the hint. Text is "I was redirected here by a friend of mine but i couldnt find anything. Help me search for flags :-)".
+- Looked at what is happeneing when we press the go button. The text in updates and some elements style are changed.
+- Tried to wget the thing but it was stuck at the connecting. I know that this might be wrong as I really don't know what is wget. I only know that wget is used to download the files.
+- 
+</details>  
+
+--------------------------------------------------------------------------------------------------------
 ## Currently Working On
+
+
 
 
 --------------------------------------------------------------------------------------------------------
