@@ -401,6 +401,41 @@ nc saturn.picoctf.net 60784 < imp.red
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>Ready Gladiator 1</summary>
+
+### Description
+Can you make a CoreWars warrior that wins?
+Your opponent is the Imp. The source is available [here](https://artifacts.picoctf.net/c/407/imp.red). If you wanted to pit the Imp against himself, you could download the Imp and connect to the CoreWars server like this:
+nc saturn.picoctf.net 62981 < imp.red
+To get the flag, you must beat the Imp at least once out of the many rounds.
+**Hint** You may be able to find a viable warrior in beginner docs
+
+### Steps taken to solve the problem.
+- Wget the source file in the webshell and then ran the netcat command.
+- It gave a message of 100 ties and said that my warrior must win once.
+- So again I opened the imp file in nano and changed the mov from 0, 1 to 0, 2 and ran the nc command.
+- This time the warrior 2 wins 100 times.
+- So again change the move to some higher value like 11 and again I lose all the time.
+- This time I changed the assert line to 3 and then also lost all the tries. 
+- Looked at the hint.
+- Googled the begineer docs for core wars and found this [site](https://vyznev.net/corewar/guide.html#start_imp). Did not understand much.
+- Found another [site](http://www.koth.org/info/corewars_for_dummies/dummies.html) and read things understood little then copied on of the program.
+- Program ```
+  ;redcode
+  ;name Imp Ex
+  ;assert 1
+  add #10, #-1
+  mov 2, @-1
+  jmp -2, 0
+  dat #33, #33
+  end
+  ```
+- Won 12 times ties 88 and got the flag.
+- flag: picoCTF{1mp_1n_7h3_cr055h41r5_441be1fc}
+</details>
+
+--------------------------------------------------------------------------------------------------------
 ## Unsolved
 
 --------------------------------------------------------------------------------------------------------
@@ -558,6 +593,35 @@ Connect to the program on our server: nc saturn.picoctf.net 54297
 </details>
 
 
+
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>babygame01</summary>
+
+### Description
+Get the flag and reach the exit.
+Welcome to BabyGame! Navigate around the map and see what you can find! The game is available to download [here](https://artifacts.picoctf.net/c/227/game). There is no source available, so you'll have to figure your way around the map. You can connect with it using nc saturn.picoctf.net 49813.
+**Hints-1** Use 'w','a','s','d' to move around.
+**Hints-2** There may be secret commands to make your life easy.
+
+### Steps taken to solve the problem.
+- Wget the file in the webshell which is a elf file and then cat it to see if there is flag in plain text.
+- Opened the file in nano. I has bunch of gibberish but some string like player has flag etc.
+- Ran the net cat command. It wrote some gibberish then player position, endtile postion and the player flag.
+- I entered move nothing happened it printed the same thing again. Then I enterd the player position: 4, 8 it printed things bunch of time and the printed you win but no flag.
+- I started the program again. This time entered Player Postion 5, 9 it changed the position to 5, 4.
+- I started the program again. This time entered Player Postion 6, 9 it changed the position to 6, 4.
+- Tried Player Postion 3, 3 it made the Player Postion to 7, 4.
+- Entered Player had flag: 2. Made the player postion to 8,3.
+- Looked at the hints. 
+- We can move multiple times by entering w a s d multiple times
+- I made it reach the X and then it said you won.
+- 
+</details>
+
+
+
 --------------------------------------------------------------------------------------------------------
 ## Currently Working On
 
@@ -592,7 +656,77 @@ nc saturn.picoctf.net 51650
 
 
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>hijacking</summary>
 
+### Description
+Getting root access can allow you to read the flag. Luckily there is a python file that you might like to play with.
+Through Social engineering, we've got the credentials to use on the server. SSH is running on the server.
+saturn.picoctf.net 51709
+Username: picoctf
+Password: rZSsB--vJK  
+**Hints-1** Check for Hidden files
+**Hints-2** No place like Home:
+
+### Steps taken to solve the problem.
+- SSH in the sever using the given credentials. 
+- Cd ../.. . Cd to the challenge. Gave error that permission is denied.
+- So we need to get the admin privilages. Enterd the su to get the root access. It asked for the password entered the one given above thing failed.
+- Tried the su picoctf it asked for the password and I don't know the password.
+- Looked at the hints. 
+- Cd home/picoctf and the run ls -a as hint mentions to check for the hidden files.
+- There bunch of file like .bash_logout, .bashrd, .cache, .profile, .server.py
+- The problem mentions about the py file. So we open the server py file in nano.
+- There is no nano is ssh server so we cat the file. No python to run the file too.
+- So we copy the file contents.
+- I made the new server.py file on the webshell and then ran it there. I printed a base64 encoded string and then I base64 decoded it is a IP address.
+- 
+</details>
+
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>UnforgottenBits</summary>
+
+### Description
+Download this disk image and find the flag.
+Note: if you are using the webshell, download and extract the disk image into /tmp not your home directory.
+[Download compressed disk image](https://artifacts.picoctf.net/c/491/disk.flag.img.gz)
+
+### Steps taken to solve the problem.
+- content
+
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>tic-tac</summary>
+
+### Description
+Someone created a program to read text files; we think the program reads files with root privileges but apparently it only accepts to read files that are owned by the user running it.
+Additional details will be available after launching your challenge instance.
+
+### Steps taken to solve the problem.
+- content
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>Ready Gladiator 2</summary>
+
+### Description
+Can you make a CoreWars warrior that wins every single round?
+Your opponent is the Imp. The source is available [here](https://artifacts.picoctf.net/c/280/imp.red). If you wanted to pit the Imp against himself, you could download the Imp and connect to the CoreWars server like this:
+nc saturn.picoctf.net 53975 < imp.red
+To get the flag, you must beat the Imp all 100 rounds.
+
+### Steps taken to solve the problem.
+- Wget the file and changed the assert line to 0
+- Ran the  nc command gave an error.
+- Changed the assert line to 1.
+- Added another mov line with 1, 5 and still did not win any thing.
+</details>
 
 --------------------------------------------------------------------------------------------------------
 <details>
