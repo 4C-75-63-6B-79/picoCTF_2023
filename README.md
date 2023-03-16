@@ -383,6 +383,24 @@ Password: password
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>Ready Gladiator 0</summary>
+
+### Description
+Can you make a CoreWars warrior that always loses, no ties?
+Your opponent is the Imp. The source is available [here](https://artifacts.picoctf.net/c/314/imp.red). If you wanted to pit the Imp against himself, you could download the Imp and connect to the CoreWars server like this:
+nc saturn.picoctf.net 60784 < imp.red
+
+### Steps taken to solve the problem.
+- Wget the source in the webshell.
+- Then ran the nc command.
+- I did a few things and ended with message "Try again. Your warrior (warrior 1) must lose all rounds, no ties.".
+- I opened the file in the nano and looked at the code and did not understand anything.
+- There was mov command changed the 1 to 5. Then again ran the nc command and this time it gave me the flag. This was total hit and miss for me.
+- flag: picoCTF{h3r0_t0_z3r0_4m1r1gh7_e1610ed2}
+</details>
+
+--------------------------------------------------------------------------------------------------------
 ## Unsolved
 
 --------------------------------------------------------------------------------------------------------
@@ -567,6 +585,10 @@ nc saturn.picoctf.net 51650
 - Entered 269033814 and the answer was wrong.
 - 
 </details>
+
+
+
+
 
 
 
