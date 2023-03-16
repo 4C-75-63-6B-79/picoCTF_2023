@@ -278,6 +278,31 @@ Download the email file [here](https://artifacts.picoctf.net/c/363/email-export.
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>two-sum</summary>
+
+### Description
+Can you solve this?
+What two positive numbers can make this possible: n1 > n1 + n2 OR n2 > n1 + n2
+Enter them here nc saturn.picoctf.net 49225. [Source](https://artifacts.picoctf.net/c/252/flag.c)
+
+### Steps taken to solve the problem.
+- Nc into the server. Entered any random number nothing happened.
+- Wget the source file in the webshell and opened it inside of nano.
+- Looked into the flag.c file. Saw if there is a function addIntOvf which if returns 0 then the program will exit. So some how i have to enter 2 numbers such that both of them are either positive or negative but their sum is of opposite sign.
+- This is something like in java if we try to hold a value which is larger than what int data type can hold it will become negative something like that I studied in a book but don't remember it. 
+- Google what is integer overflow. Read the [wikipedia article](https://en.wikipedia.org/wiki/Integer_overflow).
+- Google what is the size of integer in c language. It is 2 bytes or 16 bits.
+- Googled largest number integer in c language can hold. 2147483647
+- Ran the program with gcc flag.c then ./a.out. Entered the 2147483647 1 numbers
+- Got you have an integer overflow. Flag not found please run this on server.
+- By this time the instance was shut down. So again started it.
+- But when I entered the above mentioned numbers nothing was happening. I don't know what to do.
+- Then at later time the thing was working correctly entered the above numbers got the flag.
+- flag: picoCTF{Tw0_Sum_Integer_Bu773R_0v3rfl0w_fe14e9e9}
+</details>
+
+--------------------------------------------------------------------------------------------------------
 ## Unsolved
 
 --------------------------------------------------------------------------------------------------------
@@ -417,31 +442,82 @@ Password: password
 - content
 </details>
 
---------------------------------------------------------------------------------------------------------
-## Currently Working On
+
+
+-----------------------------------------------------------------------------------------------------
+<details>
+<summary>Invisible Words</summary>
+
+### Description
+Do you recognize this cyberpunk baddie? We don't either. AI art generators are all the rage nowadays, which makes it hard to get a reliable known cover image. But we know you'll figure it out. The suspect is believed to be trafficking in classics. That probably won't help crack the stego, but we hope it will give motivation to bring this criminal to justice!
+Download the image [here](https://artifacts.picoctf.net/c/416/output.bmp).
+**Hints-1**Something doesn't quite add up with this image...
+**Hints-2**How's the image quality?
+
+### Steps taken to solve the problem.
+- Wget the file and it is a .bmp file.
+- Open it in the online hexedit. Also opened this [wikipedia article](https://en.wikipedia.org/wiki/BMP_file_format#:~:text=The%20BMP%20file%20format%20or,and%20OS%2F2%20operating%20systems.)
+- Looked at the hints.
+</details>
+
 
 --------------------------------------------------------------------------------------------------------
 <details>
-<summary>two-sum</summary>
+<summary>SRA</summary>
 
 ### Description
-Can you solve this?
-What two positive numbers can make this possible: n1 > n1 + n2 OR n2 > n1 + n2
-Enter them here nc saturn.picoctf.net 49225. [Source](https://artifacts.picoctf.net/c/252/flag.c)
+I just recently learnt about the SRA public key cryptosystem... or wait, was it supposed to be RSA? Hmmm, I should probably check...
+Additional details will be available after launching your challenge instance
+File is [here](https://artifacts.picoctf.net/c/294/chal.py)
 
 ### Steps taken to solve the problem.
-- Nc into the server. Entered any random number nothing happened.
-- Wget the source file in the webshell and opened it inside of nano.
-- Looked into the flag.c file. Saw if there is a function addIntOvf which if returns 0 then the program will exit. So some how i have to enter 2 numbers such that both of them are either positive or negative but their sum is of opposite sign.
-- This is something like in java if we try to hold a value which is larger than what int data type can hold it will become negative something like that I studied in a book but don't remember it. 
-- Google what is integer overflow. Read the [wikipedia article](https://en.wikipedia.org/wiki/Integer_overflow).
-- Google what is the size of integer in c language. It is 2 bytes or 16 bits.
-- Googled largest number integer in c language can hold. 2147483647
-- Ran the program with gcc flag.c then ./a.out. Entered the 2147483647 2147483647 numbers
-- Got you have an integer overflow. Flag not found please run this on server.
-- By this time the instance was shut down. So again started it.
+- Wget the file and opened it in nano.
+- I think it is normal RSA.
+- We need to find the pride string which is getting encoded.
+- Googled crypto thing that is being imported to learn about the inverse function.
+  ### Program Description
+  - We are creating a variable pride and storing random alphabets and digits in it. The length of the word is 16.
+  - We are then storing 2 prime numbers of 128 bits in the varialbes gluttony and greed.
+  - Then we are storing the product of prime numbers in lust variable which is N in rsa.
+  - Sloth is 655537 which is e in the rsa.
+  - In the variable envy we are basically storing the private key which is d.
+  - We are then converting out plain text to binary string and then converting it to base 256 number.
+  - Let pride encoded string be byte string b'ab' then 256^1*97 + 256^0*98 = 29430 is what the base 256.
+  - Then we raise this number it to power of sloth which is e and then mod it by lust which is N.
+  - So anger variable stores the encrypted text.
+  - It then prints the encrypted text and the private key.
+  - We then have to enter the plain text to get the flag.
+- So for the problem we know d, e and the encrypted text we have to find the plain text.
 </details>
 
+
+--------------------------------------------------------------------------------------------------------
+## Currently Working On
+
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>Virtual Machine 1</summary>
+
+### Description
+The enemy has upgraded their mechanical analog computer. Start an instance to begin.
+Additional details will be available after launching your challenge instance.
+##### Instance started.
+We grabbed this design doc from enemy servers: [Download](https://artifacts.picoctf.net/c/324/Virtual-Machine-1.zip). We know that the rotation of the red axle is input and the rotation of the blue axle is output. Reverse engineer the mechanism and get past their checker program:
+nc saturn.picoctf.net 51650
+**Hint-1** The supporting structure for the machine has been removed from the given design doc.
+**Hint-2** Some gears are meshed strangely, such as tooth overlapping tooth. Consider such gears as meshed correctly.
+**Hint-3** Learn enough about gear ratios to abstract details from the design doc.
+### Steps taken to solve the problem.
+- Downloaded the file on my machine and it is a zip file. Extracted things and got a dae file.
+- Imported the dae file into blender.
+- Saw an entire gear train with bevel gears. One can really count all the gears and find all the gear ratio.
+- Labled all the gears with number of teeth on the gears.
+- Found the final gear ratio which was 18718
+- Started the instance was asked that how many times the output will turn if the input is turned 14373 times.
+- Entered 269033814 and the answer was wrong.
+- 
+</details>
 
 
 
