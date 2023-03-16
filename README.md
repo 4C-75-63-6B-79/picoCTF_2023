@@ -327,6 +327,62 @@ Can you login and read the root file?
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>useless</summary>
+
+### Description
+There's an interesting script in the user's home directory
+The work computer is running SSH. We've been given a script which performs some basic calculations, explore the script and find a flag.
+Hostname: saturn.picoctf.net
+Port:     54200
+Username: picoplayer
+Password: password
+
+### Steps taken to solve the problem.
+- I ssh into the thing using this command ```ssh -p 51325 picoplayer@saturn.picoctf.net```
+- I ls and there was a file with name useless.
+- cat useless. Contents of the file are below.
+    ```
+    #!/bin/bash
+    # Basic mathematical operations via command-line arguments
+
+    if [ $# != 3 ]
+    then
+    echo "Read the code first"
+    else
+            if [[ "$1" == "add" ]]
+            then 
+            sum=$(( $2 + $3 ))
+            echo "The Sum is: $sum"  
+
+            elif [[ "$1" == "sub" ]]
+            then 
+            sub=$(( $2 - $3 ))
+            echo "The Substract is: $sub" 
+
+            elif [[ "$1" == "div" ]]
+            then 
+            div=$(( $2 / $3 ))
+            echo "The quotient is: $div" 
+
+            elif [[ "$1" == "mul" ]]
+            then
+            mul=$(( $2 * $3 ))
+            echo "The product is: $mul" 
+
+            else
+            echo "Read the manual"
+            
+            fi
+    fi
+    ```
+- This is a bash script. I don't know what it is doing. I had to google how to run a bash script. Found [this article](https://www.baeldung.com/linux/use-command-line-arguments-in-bash-script).
+- Ran the bash script ``` sh useless ```. It printed that Read the manual.
+- To read manual in terminal means to use ``` man ``` command. So I ran ``` man useless ``` which opened the man page for the useless and there was the flag at the bottom under the authors heading.
+- flag: picoCTF{us3l3ss_ch4ll3ng3_3xpl0it3d_5562}
+</details>
+
+--------------------------------------------------------------------------------------------------------
 ## Unsolved
 
 --------------------------------------------------------------------------------------------------------
@@ -432,21 +488,7 @@ The website running [here](http://saturn.picoctf.net:61202/).
 - 
 </details>  
 
---------------------------------------------------------------------------------------------------------
-<details>
-<summary>useless</summary>
 
-### Description
-There's an interesting script in the user's home directory
-The work computer is running SSH. We've been given a script which performs some basic calculations, explore the script and find a flag.
-Hostname: saturn.picoctf.net
-Port:     54200
-Username: picoplayer
-Password: password
-
-### Steps taken to solve the problem.
-- content
-</details>
 
 
 
