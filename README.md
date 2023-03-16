@@ -303,6 +303,30 @@ Enter them here nc saturn.picoctf.net 49225. [Source](https://artifacts.picoctf.
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>Permissions</summary>
+
+### Description
+Can you read files in the root file?
+The system admin has provisioned an account for you on the main server:
+ssh -p 62831 picoplayer@saturn.picoctf.net
+Password: cPC09LVcyM
+Can you login and read the root file?
+**Hint** What permissions do you have?
+### Steps taken to solve the problem.
+- Copied the ssh command on webshell but did not get the password prompt.
+- Pasted the password anyways nothing happened.
+- Ended the session.
+- Tried changing the port and then ssh. Gave an error. 
+- Again ssh tried typing in whoami, pwd ls commands nothing happened.
+- Looked at the hint.
+- The thing was later fixed and I could ssh correctly into it.
+- Then I cd ../.. . And then found a challenge folder in there.
+- cd into the challenge folder and there was metadatd.json file. I cat it and there was flag in it.
+- flag: picoCTF{uS1ng_v1m_3dit0r_021d10ab}
+</details>
+
+--------------------------------------------------------------------------------------------------------
 ## Unsolved
 
 --------------------------------------------------------------------------------------------------------
@@ -366,25 +390,7 @@ Download the image [here](https://artifacts.picoctf.net/c/418/Ninja-and-Prince-G
 - Googled how to do LSB stegnography on an image. To understand what has been done to image.
 </details>
 
---------------------------------------------------------------------------------------------------------
-<details>
-<summary>Permissions</summary>
 
-### Description
-Can you read files in the root file?
-The system admin has provisioned an account for you on the main server:
-ssh -p 62831 picoplayer@saturn.picoctf.net
-Password: cPC09LVcyM
-Can you login and read the root file?
-**Hint** What permissions do you have?
-### Steps taken to solve the problem.
-- Copied the ssh command on webshell but did not get the password prompt.
-- Pasted the password anyways nothing happened.
-- Ended the session.
-- Tried changing the port and then ssh. Gave an error. 
-- Again ssh tried typing in whoami, pwd ls commands nothing happened.
-- Looked at the hint.
-</details>
 
 --------------------------------------------------------------------------------------------------------
 <details>
@@ -469,6 +475,7 @@ Download the image [here](https://artifacts.picoctf.net/c/416/output.bmp).
 I just recently learnt about the SRA public key cryptosystem... or wait, was it supposed to be RSA? Hmmm, I should probably check...
 Additional details will be available after launching your challenge instance
 File is [here](https://artifacts.picoctf.net/c/294/chal.py)
+Connect to the program on our server: nc saturn.picoctf.net 54297
 
 ### Steps taken to solve the problem.
 - Wget the file and opened it in nano.
