@@ -436,6 +436,130 @@ To get the flag, you must beat the Imp at least once out of the many rounds.
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>Ready Gladiator 2</summary>
+
+### Description
+Can you make a CoreWars warrior that wins every single round?
+Your opponent is the Imp. The source is available [here](https://artifacts.picoctf.net/c/280/imp.red). If you wanted to pit the Imp against himself, you could download the Imp and connect to the CoreWars server like this:
+nc saturn.picoctf.net 51703 < imp.red
+To get the flag, you must beat the Imp all 100 rounds.
+**Hint** If your warrior is close, try again, it may work on subsequent tries... why is that?
+
+### Steps taken to solve the problem.
+- Wget the file and changed the assert line to 0
+- Ran the  nc command gave an error.
+- Changed the assert line to 1.
+- Added another mov line with 1, 5 and still did not win any thing.
+- Copied the code from the **Ready Gladiator 1** from the solved section and the ran the nc command.
+- Won 19 times and tied 81 times. Looked at the hint.
+- Ran nc command again this time won 17 times and ties 83 times.
+- Read this [guide](https://vyznev.net/corewar/guide.html).
+- Read the above guide and understood a little bit of things but still could not write my own program. What I learned from the guide that there are warriors.
+- So googled warriors for core wars and found this [startegy page](https://corewar.co.uk/strategy.htm). Tried copy pasting various warriors and ran them.
+- Tried dwarf, paper and then stone/imp.
+- Tried the clear-imp and got a win of 98 highest.
+- Tried Digitalis in clear/imp example section scored 91 and dust 0.7 also scored 99(on mutiple tries) and then ran rise of dragon won 99 times.
+- Code for [rise of dragons](https://corewar.co.uk/riseofthedragon.htm) ```                                                                                                   
+  ;redcode
+  ;name Imp Ex
+  ;assert 1
+
+          org    qscan
+
+  gate    dat    4000,       1700
+  bomb    dat    >2667,      11
+
+          for    4
+          dat    0,0
+          rof
+
+          spl    #4000,      >gate
+  clear   mov    bomb,       >gate
+          djn.f  clear,      >gate
+
+          for    23
+          dat    0,0
+          rof
+
+          istep  equ 1143           ; (CORESIZE+1)/7
+
+  warr    spl    clear-1,    <3700
+          mov    imp,        *launch
+          spl    1,          <3600  ; 32 parallel processes
+          spl    1,          <3500
+          spl    1,          <3400
+          spl    1,          <3300
+          spl    1,          <3200
+          spl    nxpoint,    <3100
+  launch  djn.f  3600,       <4000
+
+          for    2
+          dat    0,0
+          rof
+
+  nxpoint add.f  #istep,     launch
+          djn.f  clear-1,    <3000
+
+  imp     mov.i  #3,         istep
+
+          for    24
+          dat    0,0
+          rof
+
+          qfac   equ 7051 ; 1467 ; 6371 ;  369
+          qdec   equ 4452 ; 2804 ; 3532 ; 3730
+
+          qa     equ (qfac*(qtab0-1-qptr)+1)
+          qb     equ (qfac*(qtab0-qptr)+1)
+          qc     equ (qfac*(qtab1-1-qptr)+1)
+          qd     equ (qfac*(qtab1-qptr)+1)
+          qe     equ (qfac*(qtab1+1-qptr)+1)
+          qf     equ (qfac*(qtab2-qptr)+1)
+
+          qtime  equ 18
+          qstep  equ -7
+          qgap   equ 87
+
+  qdecode mul.b  *q1,          qptr
+  q0      sne    <qtab0,       @qptr
+  q1      add.b  qtab1,        qptr
+  q2      mov    qtab2,        @qptr
+  qptr    mov    qtab2,        *qdec
+          add    #qstep,       qptr
+          djn    q2,           #qtime
+          jmp    warr,         qc
+  qtab1   dat    4000,         qd
+          dat    4000,         qe
+
+  qscan   sne    qptr+qdec*qe, qptr+qdec*qe+qe
+          seq    <qtab1+1,     qptr+qdec*(qe-1)+qe-1
+          jmp    qdecode,      }q1
+          sne    qptr+qdec*qb, qptr+qdec*qb+qd
+          seq    <qtab0,       qptr+qdec*(qb-1)+qd
+          jmp    qdecode,      {qdecode
+          sne    qptr+qdec*qa, qptr+qdec*qa+qd
+          seq    <qtab0-1,     qptr+qdec*(qa-1)+qd
+          djn.a  qdecode,      {qdecode
+          sne    qptr+qdec*qf, qptr+qdec*qf+qd
+          seq    <qtab2,       qptr+qdec*(qf-1)+qd
+          jmp    qdecode,      }qdecode
+          sne    qptr+qdec*qc, qptr+qdec*qc+qc
+          seq    <qtab1-1,     qptr+qdec*(qc-1)+qc-1
+          jmp    qdecode,      {q1
+          sne    qptr+qdec*qd, qptr+qdec*qd+qd
+          seq    <qtab1,       qptr+qdec*(qd-1)+qd-1
+          jmp    qdecode,      <qa
+  qtab0   jmp    warr,         <qb
+  qtab2   dat    qgap,         qf
+  end
+  ```
+- I tried the above code mutiple times may be 40 times and then got the flag. I don't know what is happening in the code and I am not good enough for anything. So sorry.
+- Just copy the code in imp.red file and then run the nc command. You might get the flag.
+- flag: picoCTF{d3m0n_3xpung3r_9a074a57}
+</details>
+
+--------------------------------------------------------------------------------------------------------
 ## Unsolved
 
 --------------------------------------------------------------------------------------------------------
@@ -590,6 +714,7 @@ Connect to the program on our server: nc saturn.picoctf.net 54297
   - It then prints the encrypted text and the private key.
   - We then have to enter the plain text to get the flag.
 - So for the problem we know d, e and the encrypted text we have to find the plain text.
+- 
 </details>
 
 
@@ -699,13 +824,40 @@ Note: if you are using the webshell, download and extract the disk image into /t
 
 </details>
 
+
+
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>Java Code Analysis!?!</summary>
+
+### Description
+BookShelf Pico, my premium online book-reading service.
+I believe that my website is super secure. I challenge you to prove me wrong by reading the 'Flag' book!
+Here are the credentials to get you started:
+Username: "user"
+Password: "user"
+Source code can be downloaded [here](https://artifacts.picoctf.net/c/478/bookshelf-pico.zip).
+Website can be accessed [here](http://saturn.picoctf.net:55420/)!.
+**Hint-1** Maybe try to find the JWT Signing Key ("secret key") in the source code? Maybe it's hardcoded somewhere? Or maybe try to crack it?
+**Hint-2** The 'role' and 'userId' fields in the JWT can be of interest to you!
+**Hint-3** The 'controllers', 'services' and 'security' java packages in the given source code might need your attention. We've provided a README.md file that contains some documentation.
+**Hint-4** Upgrade your 'role' with the new (cracked) JWT. And re-login for the new role to get reflected in browser's localStorage.
+
+### Steps taken to solve the problem.
+- Wget the source and unzip it and then go into src > main > java > io > github > nandandesai > pico.
+- Opened the java file in nano. No flag there.
+- Looked in the repositories. No flag in there too.
+- Looked in few more folder. Nothing useful found. Since there are too many files I looked at the hints.
+</details>
+
 --------------------------------------------------------------------------------------------------------
 <details>
 <summary>tic-tac</summary>
 
 ### Description
 Someone created a program to read text files; we think the program reads files with root privileges but apparently it only accepts to read files that are owned by the user running it.
-Additional details will be available after launching your challenge instance.
+ssh to saturn.picoctf.net:49798, and run the binary named "txtreader" once connected. Login as ctf-player with the password, d137d16e
 
 ### Steps taken to solve the problem.
 - content
@@ -713,20 +865,68 @@ Additional details will be available after launching your challenge instance.
 
 --------------------------------------------------------------------------------------------------------
 <details>
-<summary>Ready Gladiator 2</summary>
+<summary>babygame02</summary>
 
 ### Description
-Can you make a CoreWars warrior that wins every single round?
-Your opponent is the Imp. The source is available [here](https://artifacts.picoctf.net/c/280/imp.red). If you wanted to pit the Imp against himself, you could download the Imp and connect to the CoreWars server like this:
-nc saturn.picoctf.net 53975 < imp.red
-To get the flag, you must beat the Imp all 100 rounds.
+Break the game and get the flag.
+Welcome to BabyGame 02! Navigate around the map and see what you can find! The game is available to download here. There is no source available, so you'll have to figure your way around the map. You can connect with it using nc saturn.picoctf.net 55756.
 
 ### Steps taken to solve the problem.
-- Wget the file and changed the assert line to 0
-- Ran the  nc command gave an error.
-- Changed the assert line to 1.
-- Added another mov line with 1, 5 and still did not win any thing.
+- Ran the nc command in the webshell.
+- Same game as the babygame01. I have not solve that one so
 </details>
+
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>MORE SQLi</summary>
+
+### Description
+Can you find the flag on this website.
+Try to find the flag [here](http://saturn.picoctf.net:54912/).
+**Hint** SQLiLite
+
+### Steps taken to solve the problem.
+- Opened the site and just entered gibberish.
+- This has something to do with the ways people use to modify data using queries. I have watched it in some videos but don't know how to do it.
+- So I looked at hint.
+- Then googled about SQL injection. Looked at few sites.
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>cancri-sp</summary>
+
+### Description
+Life is short; opportunity fleeting; the experiment perilous; judgment flawed.
+Website is [here](http://saturn.picoctf.net:55507/).
+Download [source.tar.gz](https://artifacts.picoctf.net/c/368/source.tar.gz).
+
+### Steps taken to solve the problem.
+- Used the link to open the website.
+- Wget the source file on the webshell and try to explore it.
+- 
+</details>
+
+
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>PowerAnalysis: Warmup</summary>
+
+### Description
+This encryption algorithm leaks a "bit" of data every time it does a computation. Use this to figure out the encryption key.
+Download the encryption program here [encrypt.py](https://artifacts.picoctf.net/c/433/encrypt.py). Access the running server with nc saturn.picoctf.net 59900.
+The flag will be of the format picoCTF{<encryption key>} where <encryption key> is 32 lowercase hex characters comprising the 16-byte encryption key being used by the program.
+
+### Steps taken to solve the problem.
+- Wget the encryptpy file.
+- Nc into the server we get a propmpt the 16 bytes text encoded as hex. So I look at the py file in nano.
+</details>
+
+
+
+
 
 --------------------------------------------------------------------------------------------------------
 <details>
