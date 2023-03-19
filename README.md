@@ -559,6 +559,7 @@ To get the flag, you must beat the Imp all 100 rounds.
 - flag: picoCTF{d3m0n_3xpung3r_9a074a57}
 </details>
 
+--------------------------------------------------------------------------------------------------------
 <details>
 <summary>Virtual Machine 1</summary>
 
@@ -779,8 +780,6 @@ Welcome to BabyGame! Navigate around the map and see what you can find! The game
 --------------------------------------------------------------------------------------------------------
 ## Currently Working On
 
-
---------------------------------------------------------------------------------------------------------
 
 
 
