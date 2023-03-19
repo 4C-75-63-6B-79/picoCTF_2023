@@ -585,6 +585,25 @@ nc saturn.picoctf.net 51650
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>money-ware</summary>
+
+### Description
+Flag format: picoCTF{Malwarename}
+The first letter of the malware name should be capitalized and the rest lowercase.
+Your friend just got hacked and has been asked to pay some bitcoins to 1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX. He doesn’t seem to understand what is going on and asks you for advice. Can you identify what malware he’s being a victim of?
+**Hint-1** Some crypto-currencies abuse databases exist; check them out!
+**Hint-2** Maybe Google might help.
+
+### Steps taken to solve the problem.
+- Googled the string to which the bitcoins are supposed to be payed.
+- Found articles on [petya attack](https://www.vsec.infinigate.co.uk/blog/worlds-most-famous-bitcoin-wallets-petya-wannacry-ransomware).
+- Google the name of the malware no success.
+- Tried entering petya in the flag format. Got the flag.
+- flag: picoCTF{Petya}
+</details>
+
+--------------------------------------------------------------------------------------------------------
 ## Unsolved
 
 --------------------------------------------------------------------------------------------------------
@@ -610,22 +629,7 @@ Look at this image [here](https://artifacts.picoctf.net/c/507/atbash.jpg).
 </details>
 
 
---------------------------------------------------------------------------------------------------------
-<details>
-<summary>money-ware</summary>
 
-### Description
-Flag format: picoCTF{Malwarename}
-The first letter of the malware name should be capitalized and the rest lowercase.
-Your friend just got hacked and has been asked to pay some bitcoins to 1Mz7153HMuxXTuR2R1t78mGSdzaAtNbBWX. He doesn’t seem to understand what is going on and asks you for advice. Can you identify what malware he’s being a victim of?
-**Hint-1** Some crypto-currencies abuse databases exist; check them out!
-**Hint-2** Maybe Google might help.
-
-### Steps taken to solve the problem.
-- Googled the string to which the bitcoins are supposed to be payed.
-- Found articles on petya attack.
-- Google the name of the malware no success.
-</details>
 
 --------------------------------------------------------------------------------------------------------
 <details>
