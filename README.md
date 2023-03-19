@@ -559,6 +559,31 @@ To get the flag, you must beat the Imp all 100 rounds.
 - flag: picoCTF{d3m0n_3xpung3r_9a074a57}
 </details>
 
+<details>
+<summary>Virtual Machine 1</summary>
+
+### Description
+The enemy has upgraded their mechanical analog computer. Start an instance to begin.
+Additional details will be available after launching your challenge instance.
+##### Instance started.
+We grabbed this design doc from enemy servers: [Download](https://artifacts.picoctf.net/c/324/Virtual-Machine-1.zip). We know that the rotation of the red axle is input and the rotation of the blue axle is output. Reverse engineer the mechanism and get past their checker program:
+nc saturn.picoctf.net 51650
+**Hint-1** The supporting structure for the machine has been removed from the given design doc.
+**Hint-2** Some gears are meshed strangely, such as tooth overlapping tooth. Consider such gears as meshed correctly.
+**Hint-3** Learn enough about gear ratios to abstract details from the design doc.
+### Steps taken to solve the problem.
+- Downloaded the file on my machine and it is a zip file. Extracted things and got a dae file.
+- Imported the dae file into blender.
+- Saw an entire gear train with bevel gears. One can really count all the gears and find all the gear ratio.
+- Labled all the gears with number of teeth on the gears.
+- Found the final gear ratio which was 18718
+- Started the instance was asked that how many times the output will turn if the input is turned 14373 times.
+- Entered 269033814 and the answer was wrong.
+- Again  calculated the ratios and had made mistake in the previous attempt. The correct ratio came to be 9359.
+- Again launched the instance and got the input rpm to be 22039 so the final output is going to be 9359 * 22039 = 206263001. This was correct and got the flag.
+- picoCTF{m0r3_g34r5_3g4d_2efa1d52}
+</details>
+
 --------------------------------------------------------------------------------------------------------
 ## Unsolved
 
@@ -752,28 +777,7 @@ Welcome to BabyGame! Navigate around the map and see what you can find! The game
 
 
 --------------------------------------------------------------------------------------------------------
-<details>
-<summary>Virtual Machine 1</summary>
 
-### Description
-The enemy has upgraded their mechanical analog computer. Start an instance to begin.
-Additional details will be available after launching your challenge instance.
-##### Instance started.
-We grabbed this design doc from enemy servers: [Download](https://artifacts.picoctf.net/c/324/Virtual-Machine-1.zip). We know that the rotation of the red axle is input and the rotation of the blue axle is output. Reverse engineer the mechanism and get past their checker program:
-nc saturn.picoctf.net 51650
-**Hint-1** The supporting structure for the machine has been removed from the given design doc.
-**Hint-2** Some gears are meshed strangely, such as tooth overlapping tooth. Consider such gears as meshed correctly.
-**Hint-3** Learn enough about gear ratios to abstract details from the design doc.
-### Steps taken to solve the problem.
-- Downloaded the file on my machine and it is a zip file. Extracted things and got a dae file.
-- Imported the dae file into blender.
-- Saw an entire gear train with bevel gears. One can really count all the gears and find all the gear ratio.
-- Labled all the gears with number of teeth on the gears.
-- Found the final gear ratio which was 18718
-- Started the instance was asked that how many times the output will turn if the input is turned 14373 times.
-- Entered 269033814 and the answer was wrong.
-- 
-</details>
 
 
 
@@ -924,6 +928,27 @@ The flag will be of the format picoCTF{<encryption key>} where <encryption key> 
 - Nc into the server we get a propmpt the 16 bytes text encoded as hex. So I look at the py file in nano.
 </details>
 
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>Horsetrack</summary>
+
+### Description
+I'm starting to write a game about horse racing, would you mind testing it out? Maybe you can find some of my easter eggs... Hopefully it's a heap of fun!
+[vuln](https://artifacts.picoctf.net/c/459/vuln), [libc.so.6](), [ld-linux-x86-64.so.2](https://artifacts.picoctf.net/c/459/ld-linux-x86-64.so.2), nc saturn.picoctf.net 59143
+
+### Steps taken to solve the problem.
+- Ran the nc command first to see what is this game. Looked like a command line thing where we are prompted to enter the instructions and things happen.
+- Wget the vuln file and it is a elf file.
+- Wget the second file which is also a elf file.
+- Wget the third file and it is also a elf file.
+- Elf file problems are difficult and I really don't under stand them.
+- I opened the file in the nano and most of the content in them is gibberish. So according to me we might have to find the flag using just interaction with the program.
+- Ran the nc command and interacted with the thing.
+- We need to add horse with stable index, name length and name.
+- Added 3 horses and then wanted to race them gave an error that not enough horses.
+- 
+</details>
 
 
 
