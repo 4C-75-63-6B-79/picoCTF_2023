@@ -605,6 +605,43 @@ Your friend just got hacked and has been asked to pay some bitcoins to 1Mz7153HM
 </details>
 
 --------------------------------------------------------------------------------------------------------
+<details>
+<summary>babygame01</summary>
+
+### Description
+Get the flag and reach the exit.
+Welcome to BabyGame! Navigate around the map and see what you can find! The game is available to download [here](https://artifacts.picoctf.net/c/227/game). There is no source available, so you'll have to figure your way around the map. You can connect with it using nc saturn.picoctf.net 49813.
+**Hints-1** Use 'w','a','s','d' to move around.
+**Hints-2** There may be secret commands to make your life easy.
+
+### Steps taken to solve the problem.
+- Wget the file in the webshell which is a elf file and then cat it to see if there is flag in plain text.
+- Opened the file in nano. I has bunch of gibberish but some string like player has flag etc.
+- Ran the net cat command. It wrote some gibberish then player position, endtile postion and the player flag.
+- I entered move nothing happened it printed the same thing again. Then I enterd the player position: 4, 8 it printed things bunch of time and the printed you win but no flag.
+- I started the program again. This time entered Player Postion 5, 9 it changed the position to 5, 4.
+- I started the program again. This time entered Player Postion 6, 9 it changed the position to 6, 4.
+- Tried Player Postion 3, 3 it made the Player Postion to 7, 4.
+- Entered Player had flag: 2. Made the player postion to 8,3.
+- Looked at the hints. 
+- We can move multiple times by entering w a s d multiple times
+- I made it reach the X and then it said you won.
+- I looked at hint and it said there are some secret commands. So typed run or jump and walk.
+- When entered walk the player changed from @ to k. So typed again wala. It changed to a.
+- Typed lk it change to k. So thought(before this thought I typed many other characters thinking it might reveal the flag. So it is all hit and try and method.) of typing lX changed to X. 
+- Now the end tile positon also updated to the position of the player.
+- Moved that X around with the w a s d and took it to first postion and the then beyond the scrren. At this point I was just typing the a key and did not stop to see the result. 
+- The program said suddenly that I have 46 flag but did not showed me the flag and stopped.
+- Now with the same approach but see the result more carefully.
+- Type lX then enter then type wwww then enter aaaa to take the player to starting postion of the board(0,0).
+- Now enter a(your player will go beyond the boundaries of the board) and press enter till you see the change in the player has flag value which will become 88.
+- Now start bringing back the player to the visible part of the board using a. Once you can see the player take it to the end postion that is to the place where the X is present at the last row and last column.
+- When you reach there you will get the flag.
+- flag: picoCTF{gamer_m0d3_enabled_0a880baf}
+</details>
+
+
+--------------------------------------------------------------------------------------------------------
 ## Unsolved
 
 --------------------------------------------------------------------------------------------------------
@@ -750,30 +787,6 @@ Connect to the program on our server: nc saturn.picoctf.net 54297
 
 
 
---------------------------------------------------------------------------------------------------------
-<details>
-<summary>babygame01</summary>
-
-### Description
-Get the flag and reach the exit.
-Welcome to BabyGame! Navigate around the map and see what you can find! The game is available to download [here](https://artifacts.picoctf.net/c/227/game). There is no source available, so you'll have to figure your way around the map. You can connect with it using nc saturn.picoctf.net 49813.
-**Hints-1** Use 'w','a','s','d' to move around.
-**Hints-2** There may be secret commands to make your life easy.
-
-### Steps taken to solve the problem.
-- Wget the file in the webshell which is a elf file and then cat it to see if there is flag in plain text.
-- Opened the file in nano. I has bunch of gibberish but some string like player has flag etc.
-- Ran the net cat command. It wrote some gibberish then player position, endtile postion and the player flag.
-- I entered move nothing happened it printed the same thing again. Then I enterd the player position: 4, 8 it printed things bunch of time and the printed you win but no flag.
-- I started the program again. This time entered Player Postion 5, 9 it changed the position to 5, 4.
-- I started the program again. This time entered Player Postion 6, 9 it changed the position to 6, 4.
-- Tried Player Postion 3, 3 it made the Player Postion to 7, 4.
-- Entered Player had flag: 2. Made the player postion to 8,3.
-- Looked at the hints. 
-- We can move multiple times by entering w a s d multiple times
-- I made it reach the X and then it said you won.
-- 
-</details>
 
 
 
@@ -953,8 +966,43 @@ I'm starting to write a game about horse racing, would you mind testing it out? 
 - 
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>Special</summary>
 
+### Description
+Don't power users get tired of making spelling mistakes in the shell? Not anymore! Enter Special, the Spell Checked Interface for Affecting Linux. Now, every word is properly spelled and capitalized... automatically and behind-the-scenes! Be the first to test Special in beta, and feel free to tell us all about how Special streamlines every development process that you face. When your co-workers see your amazing shell interface, just tell them: That's Special (TM)
+Start your instance to see connection details.
+ssh -p 63865 ctf-player@saturn.picoctf.net
+The password is af86add3
+**Hint** Experiment with different shell syntax.
 
+### Steps taken to solve the problem.
+- Ssh in to the thing.
+- Typed ls noticed it said that Is not found.
+- Then typed cd got Ad not found. So I thought is doing some rot on first character.
+- Typed in ed gave back ed not found and when typed fd gave Fed not found.
+- So no idea what it is doing.
+- Typed ssh gave Why go back to inferior shell?. Still no idea why it gave that.
+- Read the problem and entered That's Special (TM) gave syntax error unquoted string. Still I don't understand what we have to do here. Looked at the hint.
+- If you enter any word that has sh in it it says why go to inferior shell.
+
+</details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>Template</summary>
+
+### Description
+Put this flag in standard picoCTF format before submitting. If the flag was h1_1m_7h3_f14g submit picoCTF{h1_1m_7h3_f14g} to the platform.
+[Windows game](https://artifacts.picoctf.net/c/285/win.zip), [Mac game](https://artifacts.picoctf.net/c/285/mac.app.zip)
+
+### Steps taken to solve the problem.
+- Downloaded and unziped the file and opened the pico.exe file.
+- It is a game. Played it. Saw a big flag out of the compound so climed the ladder to see if there is any flag there and there was not.
+- I could also not jump down from the platform or outside the walls.
+- 
+</details>
 
 --------------------------------------------------------------------------------------------------------
 <details>
@@ -966,6 +1014,11 @@ I'm starting to write a game about horse racing, would you mind testing it out? 
 ### Steps taken to solve the problem.
 - content
 </details>
+
+
+
+
+
 
 
 
