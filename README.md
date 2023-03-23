@@ -640,6 +640,28 @@ Welcome to BabyGame! Navigate around the map and see what you can find! The game
 - flag: picoCTF{gamer_m0d3_enabled_0a880baf}
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>SOAP</summary>
+
+### Description
+The web project was rushed and no security assessment was done. Can you read the /etc/passwd file?
+[Web Portal](http://saturn.picoctf.net:51531/)
+**Hint** XML external entity Injection
+### Steps taken to solve the problem.
+- Opened the website. Used the inspect element thing nothing there.
+- Tried to nc the website nothing there too.
+- Tried to wget the website, it got stuck at connecting the sever.
+- Looked at the hint. Google the hint.
+- Looked at [this site](https://portswigger.net/web-security/xxe#exploiting-xxe-to-retrieve-files). The site mentioned to install **Burp Suite** community  edition.
+- Installed the community edition.
+- Then launched the burp selected next and did not play with any settings and went to proxy tab and clicked on open browser and turned intercept on.
+- Restared the problem instance and then pasted the link the opened browser window and clicked on the button in the card Open Details.
+- Then the burp caught the request and I pasted this in the xml portion. ```<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>``` and replace the id number with ```&xxe;```. Then forwarded the request and then the page loaded with the picoCTF flag.
+- I had to try and google a lot to get this solution and I did not understand most things and did as the things says. This solution does not cover all the tries that I did to get the flag.
+- flag: picoCTF{XML_3xtern@l_3nt1t1ty_55662c16}
+</details>
+
 
 --------------------------------------------------------------------------------------------------------
 ## Unsolved
@@ -692,21 +714,7 @@ Download the image [here](https://artifacts.picoctf.net/c/418/Ninja-and-Prince-G
 
 
 
---------------------------------------------------------------------------------------------------------
-<details>
-<summary>SOAP</summary>
 
-### Description
-The web project was rushed and no security assessment was done. Can you read the /etc/passwd file?
-Web Portal
-**Hint** XML external entity Injection
-### Steps taken to solve the problem.
-- Opened the website. Used the inspect element thing nothing there.
-- Tried to nc the website nothing there too.
-- Tried to wget the website, it got stuck at connecting the sever.
-- Looked at the hint. Google the hint.
-- 
-</details>
 
 --------------------------------------------------------------------------------------------------------
 <details>
@@ -893,7 +901,16 @@ Welcome to BabyGame 02! Navigate around the map and see what you can find! The g
 
 ### Steps taken to solve the problem.
 - Ran the nc command in the webshell.
-- Same game as the babygame01. I have not solve that one so
+- Same game as the babygame01. I have not solve that one so.
+- Solved the babygame 01 so have I idea of what should I do.
+- Typed lX and enter.
+- Typed wwwwaaaa and enter to take the player to the start postion of the board.
+- Then typed aaa and and did same as in babygame01. 
+- This time as I reached the final postion the end disappeared and no win thing and no flag and I was able to bring the player back.
+- So the thing failed. So now what Don't know.
+- Did the same thing as above but before reaching the end postion change the player symbol to what was originally there and this time got the win thing but not the flag.
+- Typed l made some changes to the dot lines and the looking at the player postion I tried taking the player to the X.
+- We can make the player symbol to be a dot and then player postion doesn't update at all. 
 </details>
 
 
@@ -991,7 +1008,7 @@ The password is af86add3
 
 --------------------------------------------------------------------------------------------------------
 <details>
-<summary>Template</summary>
+<summary>No way out</summary>
 
 ### Description
 Put this flag in standard picoCTF format before submitting. If the flag was h1_1m_7h3_f14g submit picoCTF{h1_1m_7h3_f14g} to the platform.
@@ -1003,6 +1020,21 @@ Put this flag in standard picoCTF format before submitting. If the flag was h1_1
 - I could also not jump down from the platform or outside the walls.
 - 
 </details>
+
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>VNE</summary>
+
+### Description
+We've got a binary that can list directories as root, try it out !!
+ssh to saturn.picoctf.net:61401, and run the binary named "bin" once connected. Login as ctf-player with the password, 3f39b042
+
+### Steps taken to solve the problem.
+- Ssh into the thing and then googled how to run binary in linux.
+- Ran using ./bin_name. Got a error saying secret_dir environment variable is not set.
+- cd ../.. and the ls. I saw the challenge file but could not open it since permission denied.
+</details>
+
 
 --------------------------------------------------------------------------------------------------------
 <details>
