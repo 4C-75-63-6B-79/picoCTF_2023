@@ -662,6 +662,41 @@ The web project was rushed and no security assessment was done. Can you read the
 - flag: picoCTF{XML_3xtern@l_3nt1t1ty_55662c16}
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>MSB</summary>
+
+### Description
+This image passes LSB statistical analysis, but we can't help but think there must be something to the visual artifacts present in this image...
+Download the image [here](https://artifacts.picoctf.net/c/418/Ninja-and-Prince-Genji-Ukiyoe-Utagawa-Kunisada.flag.png)
+**Hint** What's causing the 'corruption' of the image?
+
+### Steps taken to solve the problem.
+- Downloaded the image. Looked at it. The upper portion not good but lower portion good.
+- Googled MSB which is most significant bit and LSB least significant bit.
+- Looked at the hint. 
+- I think since in problem it is mentioned that the image passed the LSB test. May be the image is corrupted due to some things done to its Most Significant Bit. Like a Bit flip thing.
+- Tried to do the bitflip of the MSB and obtained a image but was not useful.
+- Googled about MSB stegnography found this [article](http://ijcst.com/vol33/4/anil2.pdf).
+- So if we go through all the pixels of the image and the find the MSB of all the pixels. Then we can convert that binary value to ascii which might be our flag.
+- Failed at the above solution and got a bunch of gibberish.
+- Googled how to do LSB stegnography on an image. To understand what has been done to image.
+- I tried to extract each of the MSB from each color channel thinking there might be a message stored in them but it was just 1.
+- Then I noticed that the border of the image in close to white so it's rgb value should be close to white. 
+- The I examined the pixels in the 0th row and saw a pattern in the values it had some similar looking rgb value appearing again and again like so. 
+```[103, 240, 111], [231, 112, 239], [103, 112, 111], [231, 240, 111], [231, 112, 111], [103, 112, 239] ```
+- Then I went pixel peeping in the image a saw that there is a white pixel in the first row at index 27. I printed it's pixel value which was (233, 239, 239).
+- Then I realized that the most significant bits in some of these pixels is 1 since they may have only 7 bits in them so I made sure that I am converting the decimal to 8 bit binary.
+- So we have to take the MSB of the each color of each pixel and then using those bits we can get the entire message which has the flag.
+- I tried storing all the bits in the variable but as the bits increased the program slowed down a lot. So I had to make sure that as soon as 8 bits are stored I convert those into their ascii counter parts and then remove them form the variable.
+- This the [program](/solutions/msb.py) to solve the problem. I have tried to explain the program using comments.
+- To run this program make sure that you have pillow module installed and make sure that the progrma is stored in a folder named "solutions".
+- Then run the program to get the text stored in the image. The program will generate a message.txt file in the same folder. 
+- Search for the pico string in the file and you will get the flag.
+- flag: picoCTF{15_y0ur_que57_qu1x071c_0r_h3r01c_b5e03bc5}
+</details>
+
+
 
 --------------------------------------------------------------------------------------------------------
 ## Unsolved
@@ -691,26 +726,6 @@ Look at this image [here](https://artifacts.picoctf.net/c/507/atbash.jpg).
 
 
 
---------------------------------------------------------------------------------------------------------
-<details>
-<summary>MSB</summary>
-
-### Description
-This image passes LSB statistical analysis, but we can't help but think there must be something to the visual artifacts present in this image...
-Download the image [here](https://artifacts.picoctf.net/c/418/Ninja-and-Prince-Genji-Ukiyoe-Utagawa-Kunisada.flag.png)
-**Hint** What's causing the 'corruption' of the image?
-
-### Steps taken to solve the problem.
-- Downloaded the image. Looked at it. The upper portion not good but lower portion good.
-- Googled MSB which is most significant bit and LSB least significant bit.
-- Looked at the hint. 
-- I think since in problem it is mentioned that the image passed the LSB test. May be the image is corrupted due to some things done to its Most Significant Bit. Like a Bit flip thing.
-- Tried to do the bitflip of the MSB and obtained a image but was not useful.
-- Googled about MSB stegnography found this [article](http://ijcst.com/vol33/4/anil2.pdf).
-- So if we go through all the pixels of the image and the find the MSB of all the pixels. Then we can convert that binary value to ascii which might be our flag.
-- Failed at the above solution and got a bunch of gibberish.
-- Googled how to do LSB stegnography on an image. To understand what has been done to image.
-</details>
 
 
 
@@ -737,7 +752,9 @@ The website running [here](http://saturn.picoctf.net:61202/).
 - The text in the website is similar to the hint. Text is "I was redirected here by a friend of mine but i couldnt find anything. Help me search for flags :-)".
 - Looked at what is happeneing when we press the go button. The text in updates and some elements style are changed.
 - Tried to wget the thing but it was stuck at the connecting. I know that this might be wrong as I really don't know what is wget. I only know that wget is used to download the files.
-- 
+- Opened burpsuite and then used it to capture the request after entering the password and username.
+- In one of the request there was this weird looking text ```A¤¥€!Ur[v[Œú„=OªS€Òž’~Ùýë¹ñY'
+Ÿ u¨T>```
 </details>  
 
 
@@ -834,7 +851,42 @@ Password: rZSsB--vJK
 - There is no nano is ssh server so we cat the file. No python to run the file too.
 - So we copy the file contents.
 - I made the new server.py file on the webshell and then ran it there. I printed a base64 encoded string and then I base64 decoded it is a IP address.
-- 
+- Now I tried to deconstruct the code line by line.
+  ```
+  import base64
+  import os
+  import socket
+  ip = 'picoctf.org'
+
+  # this is a way to ping server using python
+  # 
+  response = os.system("ping -c 1 " + ip) 
+  #saving ping details to a variable
+  host_info = socket.gethostbyaddr(ip) 
+  #getting IP from a domaine
+  host_info_to_str = str(host_info[2])
+  host_info = base64.b64encode(host_info_to_str.encode('ascii'))
+  print("Hello, this is a part of information gathering",'Host: ', host_info)  
+  ```
+- I googled what is pinging and then read this [wikipedia article](https://en.wikipedia.org/wiki/Ping_(networking_utility)).
+- Then I tried running the code on my system and got the error that option -c requires admin privileges. Then I ran the thing with admin privileges and got thing like this
+ ```
+ Pinging picoctf.org [18.164.217.38] with 32 bytes of data:
+  Reply from 18.164.217.38: bytes=32 time=86ms TTL=247
+  Reply from 18.164.217.38: bytes=32 time=51ms TTL=247
+  Reply from 18.164.217.38: bytes=32 time=59ms TTL=247
+  Reply from 18.164.217.38: bytes=32 time=89ms TTL=247
+
+  Ping statistics for 18.164.217.38:
+      Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+  Approximate round trip times in milli-seconds:
+      Minimum = 51ms, Maximum = 89ms, Average = 71ms
+  Hello, this is a part of information gathering Host:  b'WycxOC4xNjQuMjE3LjM4J10='
+ ```
+- The base 64 encoded string is ['18.164.217.38'].
+- Then I thought of running the ping without the admin privileges. I googled how to run the ping command in python without the admin privileges and found this s[tack overflow thing](https://stackoverflow.com/questions/29952676/simple-ping-function-returns-access-denied-option-c-requires-administrative-p) which suggested to use -n in place of -c.
+- I ran the thing server.py on my machine with option n and the thing ran with same output. So I thought of donig this on the webshell. It gave error not ping found.
+- And we cannot run the file on the ssh sever too.
 </details>
 
 
@@ -877,6 +929,10 @@ Website can be accessed [here](http://saturn.picoctf.net:55420/)!.
 - Opened the java file in nano. No flag there.
 - Looked in the repositories. No flag in there too.
 - Looked in few more folder. Nothing useful found. Since there are too many files I looked at the hints.
+- Downloaded the zip on my computer and opened the folder. Went into the user folder then into books and found the flag.pdf opened it had a flag but it was not a correct flag.
+- Opened the src > main > java\io\github\nandandesai\pico > configs > BookShelfCongig.java got the place where the admin user is initialized but the password was redacted.
+- Looking through the files came upon the file named JWTService.java in security folder in main.
+- There is this variable named SECRET_KEY a
 </details>
 
 --------------------------------------------------------------------------------------------------------
@@ -942,7 +998,7 @@ Download [source.tar.gz](https://artifacts.picoctf.net/c/368/source.tar.gz).
 ### Steps taken to solve the problem.
 - Used the link to open the website.
 - Wget the source file on the webshell and try to explore it.
-- 
+- Could not download the source.tar.gz since the zip was 1 gb not have that much data.
 </details>
 
 
