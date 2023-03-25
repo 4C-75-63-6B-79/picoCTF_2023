@@ -711,7 +711,8 @@ ssh to saturn.picoctf.net:49798, and run the binary named "txtreader" once conne
 - I saw the tag of toctou in the problem so I googled it and landed on this [wikipedia page](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use).
 - Read the page the thing it exploit the race conditions. This is something that I read when dealing with promises in javascript. Race conditions are bad as they make code unpredictalbe. This is all I remember about them.
 - Then I googled how to exploit the toctou and got this [article](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use). This guide explains things and I followed it do the thing but it did not work.
-- The I found this [video](https://www.youtube.com/watch?v=5g137gsB9Wk) and did what it explained. But the problem was that when ever I tried to read the flag.txt file it sometime gave error but rest of time it just closed without displaying anything.
+- The I found this [video](https://www.youtube.com/watch?v=5g137gsB9Wk) and did what it explained. Make sure to run the program in the background. To do this you just have to type & at the end of the command.
+- But the problem was that when ever I tried to read the flag.txt file it sometime gave error but rest of time it just closed without displaying anything.
 - So I just started bashing it with up arrow key and enter to run the last command which was the ./txtreader flag.txt. And then it in more than 20 tries it gave the flag.
 - flag: picoCTF{ToctoU_!s_3a5y_f482a247}
 </details>
