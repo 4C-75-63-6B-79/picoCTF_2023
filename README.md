@@ -696,6 +696,27 @@ Download the image [here](https://artifacts.picoctf.net/c/418/Ninja-and-Prince-G
 - flag: picoCTF{15_y0ur_que57_qu1x071c_0r_h3r01c_b5e03bc5}
 </details>
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>tic-tac</summary>
+
+### Description
+Someone created a program to read text files; we think the program reads files with root privileges but apparently it only accepts to read files that are owned by the user running it.
+ssh to saturn.picoctf.net:49798, and run the binary named "txtreader" once connected. Login as ctf-player with the password, d137d16e
+
+### Steps taken to solve the problem.
+- Ssh into the server and run the binary txtreader. It gave an error and asked me to enter a filename after the command.
+- I entered the flag.txt file name and then it gave a error that I don't own the file.
+- I then entered the src.cpp and it printed the file. It was program which was checking id to see if I own the file or not.
+- I saw the tag of toctou in the problem so I googled it and landed on this [wikipedia page](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use).
+- Read the page the thing it exploit the race conditions. This is something that I read when dealing with promises in javascript. Race conditions are bad as they make code unpredictalbe. This is all I remember about them.
+- Then I googled how to exploit the toctou and got this [article](https://en.wikipedia.org/wiki/Time-of-check_to_time-of-use). This guide explains things and I followed it do the thing but it did not work.
+- The I found this [video](https://www.youtube.com/watch?v=5g137gsB9Wk) and did what it explained. But the problem was that when ever I tried to read the flag.txt file it sometime gave error but rest of time it just closed without displaying anything.
+- So I just started bashing it with up arrow key and enter to run the last command which was the ./txtreader flag.txt. And then it in more than 20 tries it gave the flag.
+- flag: picoCTF{ToctoU_!s_3a5y_f482a247}
+</details>
+
+
 
 
 --------------------------------------------------------------------------------------------------------
@@ -935,17 +956,6 @@ Website can be accessed [here](http://saturn.picoctf.net:55420/)!.
 - There is this variable named SECRET_KEY a
 </details>
 
---------------------------------------------------------------------------------------------------------
-<details>
-<summary>tic-tac</summary>
-
-### Description
-Someone created a program to read text files; we think the program reads files with root privileges but apparently it only accepts to read files that are owned by the user running it.
-ssh to saturn.picoctf.net:49798, and run the binary named "txtreader" once connected. Login as ctf-player with the password, d137d16e
-
-### Steps taken to solve the problem.
-- content
-</details>
 
 --------------------------------------------------------------------------------------------------------
 <details>
