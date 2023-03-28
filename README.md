@@ -718,6 +718,40 @@ ssh to saturn.picoctf.net:49798, and run the binary named "txtreader" once conne
 </details>
 
 
+--------------------------------------------------------------------------------------------------------
+<details>
+<summary>findme</summary>
+
+### Description
+Help us test the form by submiting the username as test and password as test!
+The website running [here](http://saturn.picoctf.net:61202/).
+**Hint** any redirections?
+
+### Steps taken to solve the problem.
+- Started the instance and opened the website.
+- Login the webiste with the given credentials.
+- A page opened with search for flag search element.
+- Opened the developer tools and went straight to the cookies thing.
+- Nothing was there.
+- Looked at the sources. Nothing there.
+- Searched for flag in the thing nothing there too.
+- Looked at the hint. Did not understand anything.
+- The text in the website is similar to the hint. Text is "I was redirected here by a friend of mine but i couldnt find anything. Help me search for flags :-)".
+- Looked at what is happeneing when we press the go button. The text in updates and some elements style are changed.
+- Tried to wget the thing but it was stuck at the connecting. I know that this might be wrong as I really don't know what is wget. I only know that wget is used to download the files.
+- Opened burpsuite and then used it to capture the request after entering the password and username.
+- In one of the request there was this weird looking text ```A¤¥€!Ur[v[Œú„=OªS€Òž’~Ùýë¹ñY'
+Ÿ u¨T>```
+- Again returned to this challenge and google redirections + web exploitation and got this [site](https://infosecwriteups.com/url-redirection-exploitation-and-mitigation-8eed73007375). Read it and thought to run the burp to see if we have some thing like this in the challenge.
+- Was looking and saw this id things thought to run from start again and base64 decode this id text.
+- I again went to the login page and ran the burp suite and looked at the things in the each interaction captured by burp.
+- I the top line there was url with id in it. The id had a text value with base64 encoded text. So I copied that text and decoded it online
+- Base64 encode text: cGljb0NURntwcm94aWVzX2Fs | plain text: picoCTF{proxies_al
+- Then again I forwareded the request and again looked for the id things and found one again.
+- Base64 encode text: bF90aGVfd2F5XzAxZTc0OGRifQ== | plain text: l_the_way_01e748db}
+- flag: picoCTF{proxies_all_the_way_01e748db}
+</details>  
+
 
 
 --------------------------------------------------------------------------------------------------------
@@ -753,31 +787,7 @@ Look at this image [here](https://artifacts.picoctf.net/c/507/atbash.jpg).
 
 
 
---------------------------------------------------------------------------------------------------------
-<details>
-<summary>findme</summary>
 
-### Description
-Help us test the form by submiting the username as test and password as test!
-The website running [here](http://saturn.picoctf.net:61202/).
-**Hint** any redirections?
-
-### Steps taken to solve the problem.
-- Started the instance and opened the website.
-- Login the webiste with the given credentials.
-- A page opened with search for flag search element.
-- Opened the developer tools and went straight to the cookies thing.
-- Nothing was there.
-- Looked at the sources. Nothing there.
-- Searched for flag in the thing nothing there too.
-- Looked at the hint. Did not understand anything.
-- The text in the website is similar to the hint. Text is "I was redirected here by a friend of mine but i couldnt find anything. Help me search for flags :-)".
-- Looked at what is happeneing when we press the go button. The text in updates and some elements style are changed.
-- Tried to wget the thing but it was stuck at the connecting. I know that this might be wrong as I really don't know what is wget. I only know that wget is used to download the files.
-- Opened burpsuite and then used it to capture the request after entering the password and username.
-- In one of the request there was this weird looking text ```A¤¥€!Ur[v[Œú„=OªS€Òž’~Ùýë¹ñY'
-Ÿ u¨T>```
-</details>  
 
 
 
@@ -819,7 +829,7 @@ Connect to the program on our server: nc saturn.picoctf.net 54297
   - We are creating a variable pride and storing random alphabets and digits in it. The length of the word is 16.
   - We are then storing 2 prime numbers of 128 bits in the varialbes gluttony and greed.
   - Then we are storing the product of prime numbers in lust variable which is N in rsa.
-  - Sloth is 655537 which is e in the rsa.
+  - Sloth is 65537 which is e in the rsa.
   - In the variable envy we are basically storing the private key which is d.
   - We are then converting out plain text to binary string and then converting it to base 256 number.
   - Let pride encoded string be byte string b'ab' then 256^1*97 + 256^0*98 = 29430 is what the base 256.
@@ -994,7 +1004,14 @@ Try to find the flag [here](http://saturn.picoctf.net:54912/).
 - Opened the site and just entered gibberish.
 - This has something to do with the ways people use to modify data using queries. I have watched it in some videos but don't know how to do it.
 - So I looked at hint.
-- Then googled about SQL injection. Looked at few sites.
+- Then googled about SQL injection. Looked at few sites. Did not understand anything.
+- Then I was on the picoctf discord and saw that we could do the previous solved ctf problems under same category to get better understanding of how to do the things.
+- So I went to the picogym and searced for sql and it gave me 2 problems. I looked up the SQLite porblem from 2022.
+- Then I watched this [video](https://www.youtube.com/watch?v=3tIXN9X7-6E) on it.
+- Did as the video did and logged in using ' OR 1=1 -- as password and name. 
+- Got a lot of entries with city phone and address and a search bar for city
+- Entered flag to search it removed all entries.
+- Then I entered the same login value it gave back all the entries into table.
 </details>
 
 --------------------------------------------------------------------------------------------------------
@@ -1026,6 +1043,45 @@ The flag will be of the format picoCTF{<encryption key>} where <encryption key> 
 ### Steps taken to solve the problem.
 - Wget the encryptpy file.
 - Nc into the server we get a propmpt the 16 bytes text encoded as hex. So I look at the py file in nano.
+- Looking at the encryption file we see that we have to enter a hex encoded plain text of 16 bytes.
+- Program also has a key which is encoded in the hex format.
+- Each byte of the plain text and the secret key is then XOR which give out a value.
+- The value from the XOR operation is then used to get the element in the Sbox tuple.
+- The value from the Sbox is then AND with the 1 which is stored in the array leak_buf.
+- The program then counts the number of 1 in the leak_Buf array an output is to the screen.
+- I tried to reverse the problem by my failed attempts below.
+- Since we are loosing some info about the key ascii value when we do the AND operation I don't know how to reverse the problem.
+- The reason is that doing AND operation with 1 will give 1 if the value from Sbox is odd which there are many and 0 which also there are many in Sbox.
+- So to determine the ascii value we need to have a the leak value to be 0 at start that I figured out using the input below.
+- ffffffffffffffffffffffffffffffff 4
+- 00ffffffffffffffffffffffffffffff 3 é
+- ff00ffffffffffffffffffffffffffff 5
+- ffff00ffffffffffffffffffffffffff 4 
+- ffffff00ffffffffffffffffffffffff 4 
+- ffffffff00ffffffffffffffffffffff 4 
+- ffffffffff00ffffffffffffffffffff 5
+- ffffffffffff00ffffffffffffffffff 3 é
+- ffffffffffffff00ffffffffffffffff 3 é
+- ffffffffffffffff00ffffffffffffff 4 
+- ffffffffffffffffff00ffffffffffff 5
+- ffffffffffffffffffff00ffffffffff 4
+- ffffffffffffffffffffff00ffffffff 4
+- ffffffffffffffffffffffff00ffffff 4
+- ffffffffffffffffffffffffff00ffff 3 é
+- ffffffffffffffffffffffffffff00ff 4 
+- ffffffffffffffffffffffffffffff00 4
+- The hex encoded plain text at which the leak_value is 0 is 00ffffffffff0000ffffffffff00ffff which mean at this point all the even value are being selected from the Sbox tuple.
+- But there are many even value with even ascii value in the Sbox tuple so it is not easy to get the value of the each byte.
+- May be I am missing something. I don't know.
+- We can automate some process using the python pwntools.
+- For first byte all the index for which the lek_vlaue is 1.
+- [1, 3, 4, 5, 6, 8, 10, 12, 14, 15, 16, 19, 30, 31, 37, 40, 44, 45, 46, 49, 50, 51, 52, 53, 54, 61, 67, 72, 74, 76, 77, 79, 83, 84, 88, 89, 90, 91, 92, 95, 97, 98, 100, 101, 105, 106, 107, 108, 110, 112, 114, 115, 117, 120, 121, 122, 123, 127, 129, 130, 131, 132, 134, 135, 136, 138, 139, 140, 143, 146, 147, 148, 151, 153, 154, 160, 161, 163, 164, 167, 168, 170, 171, 173, 174, 175, 176, 178, 179, 183, 185, 188, 189, 190, 192, 193, 197, 200, 202, 204, 205, 207, 208, 209, 210, 214, 215, 216, 218, 222, 224, 226, 228, 229, 230, 231, 232, 233, 234, 239, 240, 241, 242, 244, 246, 250, 252, 255]
+- For second byte all the index for which the lek_vlaue is 1.
+- [0, 1, 3, 4, 7, 8, 9, 10, 12, 13, 15, 17, 18, 24, 25, 28, 31, 32, 33, 35, 36, 37, 38, 40, 42, 43, 44, 47, 50, 53, 54, 55, 56, 57, 59, 60, 65, 67, 68, 70, 71, 74, 75, 78, 81, 83, 85, 89, 90, 91, 92, 93, 97, 98, 99, 100, 105, 107, 108, 109, 110, 111, 113, 116, 119, 121, 122, 123, 125, 127, 129, 131, 132, 133, 135, 136, 138, 141, 142, 143, 148, 149, 152, 155, 163, 165, 166, 167, 174, 182, 184, 185, 186, 189, 190, 191, 193, 195, 196, 198, 199, 200, 208, 209, 210, 211, 212, 215, 216, 223, 224, 225, 226, 229, 231, 233, 234, 238, 239, 240, 241, 242, 243, 244, 248, 249, 251, 254]
+- For 3 byte all the index for which the lek_vlaue is 1.
+- [5, 8, 12, 13, 14, 17, 18, 19, 20, 21, 22, 29, 33, 35, 36, 37, 38, 40, 42, 44, 46, 47, 48, 51, 62, 63, 65, 66, 68, 69, 73, 74, 75, 76, 78, 80, 82, 83, 85, 88, 89, 90, 91, 95, 99, 104, 106, 108, 109, 111, 115, 116, 120, 121, 122, 123, 124, 127, 128, 129, 131, 132, 135, 136, 138, 139, 141, 142, 143, 144, 146, 147, 151, 153, 156, 157, 158, 161, 162, 163, 164, 166, 167, 168, 170, 171, 172, 175, 178, 179, 180, 183, 185, 186, 192, 194, 196, 197, 198, 199, 200, 201, 202, 207, 208, 209, 210, 212, 214, 218, 220, 223, 224, 225, 229, 232, 234, 236, 237, 239, 240, 241, 242, 246, 247, 248, 250, 254]
+- For 4 byte all the index for which the lek_vlaue is 1.
+- [2, 3, 4, 7, 9, 10, 17, 18, 19, 20, 22, 23, 24, 26, 27, 28, 31, 32, 34, 35, 39, 41, 44, 45, 46, 48, 49, 51, 52, 55, 56, 58, 59, 61, 62, 63, 64, 65, 66, 70, 71, 72, 74, 78, 80, 81, 85, 88, 90, 92, 93, 95, 96, 97, 98, 100, 102, 106, 108, 111, 112, 114, 116, 117, 118, 119, 120, 121, 122, 127, 128, 131, 142, 143, 145, 147, 148, 149, 150, 152, 154, 156, 158, 159, 161, 162, 163, 164, 165, 166, 173, 181, 184, 188, 189, 190, 195, 196, 200, 201, 202, 203, 204, 207, 211, 216, 218, 220, 221, 223, 224, 226, 227, 229, 232, 233, 234, 235, 239, 241, 242, 244, 245, 249, 250, 251, 252, 254]
 </details>
 
 
@@ -1047,6 +1103,8 @@ I'm starting to write a game about horse racing, would you mind testing it out? 
 - Ran the nc command and interacted with the thing.
 - We need to add horse with stable index, name length and name.
 - Added 3 horses and then wanted to race them gave an error that not enough horses.
+- I entered it again to add horses this time I entered names with space in between something weird happend that after I entered hourse it did not give me a prompt that a horse has been added.
+- Then I entered the horse name only space and it accepted it.
 - 
 </details>
 
