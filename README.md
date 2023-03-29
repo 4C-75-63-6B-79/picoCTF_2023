@@ -774,23 +774,10 @@ Look at this image [here](https://artifacts.picoctf.net/c/507/atbash.jpg).
 - Opened the file in the notepad to see if there is any string so that I can decode it using the ceaser cipher.
 - strings the file in webshell ```strings atbash.jpg```. Got this long string "CDEFGHIJSTUVWXYZcdefghijstuvwxyz". Did ceaser cipher on the thing with no luck.
 - Looked at the hint. Suggest to extract it. Did ``` unzip atbash.jpg ``` got an error.
-- Googled the atbash term. Found this [wikipedia article](https://en.wikipedia.org/wiki/Atbash#:~:text=Atbash%20(Hebrew%3A%20%D7%90%D7%AA%D7%91%D7%A9%3B%20also,with%20a%20standard%20collating%20order.).
+- Googled the atbash term. Found this [wikipedia article](https://en.wikipedia.org/wiki/Atbash#:~:text=Atbash%20Hebrew%3A%20%D7%90%D7%AA%D7%91%D7%A9%3B%20also,with%20a%20standard%20collating%20order.).
 - Tried to decipher the string mentioned above using the cipher in the wikipedia article. No success.
 - Again looked at the file format and checked for any error but everything is fine.
 </details>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 -----------------------------------------------------------------------------------------------------
