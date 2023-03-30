@@ -1,5 +1,8 @@
 # picoCTF_comp_2023
 
+## Descirption
+These are my attempts to solve the problems in picoCTF 2023. I created these notes just for my self and to record my process of solving the problems. The approach used by me to solve these problems is very hit and trial kind. I tried various things that I learned when solving problems in picoGym. So please don't use these methods and go to people who are top of the leaderboard to get better solutions and correct way to do these. I did not get anything on my first try and had to do some problems over days. I am sorry that I did not categorize the problems since I wanted to keep the problmes in the order that I solved them. The total score I obtained at a the end of the picoCTF 2023 was 3600 and the my position on the leaderboard was 882 out of 6925.
+
 --------------------------------------------------------------------------------------------------------
 ## Solved
 
@@ -827,23 +830,6 @@ Connect to the program on our server: nc saturn.picoctf.net 54297
 - So for the problem we know d, e and the encrypted text we have to find the plain text.
 - 
 </details>
-
-
-
-
-
-
-
---------------------------------------------------------------------------------------------------------
-## Currently Working On
-
-
-
-
-
-
-
-
 
 --------------------------------------------------------------------------------------------------------
 <details>
